@@ -1,0 +1,172 @@
+\chapter{Introduction}
+\section{Initial engagement}
+\subsection{Introduction and background}
+Numerical methods are extensively used in numerical weather prediction (NWP) for finding approximate solutions to partial differential equations (PDEs), particularly since many of the equations being used do not have analytic solutions. These numerical methods use approximations of the function and its derivatives at discrete points in space, on what is known as a mesh. Since many features of the atmosphere are smaller than the resolution of the meshes commonly used in NWP, the weather models solved on these meshes are not usually sensitive to these features, as they will not be well resolved by the model. 
+
+Small scale weather features could be resolved better by increasing the resolution of the mesh. However, for models such as that currently in use by the Met Office, the resolution would have to be increased for the entire mesh \parencite{endgame}.  This would be very computationally expensive, and the availability of computer resources therefore limits how well small scale weather features can be resolved. Further, much of this extra computational expense may be wasted in areas of space in which the increased resolution is not needed. Mesh adaptation can be used to either add additional mesh points at or move existing mesh points to areas in which the error of the numerical solution is (or is expected to be) largest \parencite{HRR93}, meaning that for a given number of mesh points, more small scale phenomena can be resolved, and the error of the approximate solution is much reduced. This makes the numerical method much more efficient, and potentially much more accurate. Mesh adaptivity can be applied to both finite difference and finite element methods \autocite{HRR93}.
+
+Whilst mesh adaptation has been researched for many years, and has been applied to problems in other areas, it has seen little application to geophysical models (models of the atmosphere, ocean and interior of the earth). One of many reasons for this is that mesh adaptation is difficult to implement on a parallel computer, and that it would be necessary to do this because the method is computationally intensive to implement \parencite{weller10}. 
+
+ \section{Motivation for project}\label{sec:motiv}
+ Numerical weather prediction is very important to many industries and also to the public. Applications of NWP include the aviation industry, where air traffic controllers use short term weather forecasts to schedule landings of arriving aircraft to avoid adverse weather conditions \parencite{committee95}, and businesses such as energy providers, which buy gas cheaply when they receive forecasts of cold weather, when they expect demands to be higher \parencite{inness12}. Weather forecasts can also be used to help people prepare for extreme weather, and the Met Office provide severe weather warnings to give the public and businesses an indication of both the likelihood of a given weather event occurring, and the impact it could have if it were to occur \parencite{weatherwarn}. 
+ 
+In August 2004, several hours of heavy rain caused flooding at Boscastle. Two million tonnes of water flowed through Boscastle, Cornwall, a large amount of water having come from local hills. Many cars were swept away by the water, and properties were damaged. However, the Met Office had only predicted light rain. This is because the storms were positioned in a thin line, which was much too narrow to be effectively represented by the model in use at the time, which used a grid with 12km resolution. After the event, the weather data from the day was used to run a forecast of the weather around the time of the storms, using a grid with 1km resolution. This model was able to much more accurately predict the narrow row of storms that occurred \parencite{metboscastle}. Since a well designed moving mesh method for solving the model equations would have relocated mesh nodes to the location in which the storms were taking place, its use may well have produced a more accurate forecast, which could accurately model the narrow line of storms which occurred.
+
+Clearly the accuracy of weather forecasts is very important, and inaccurate forecasts could cause large costs for many businesses, or leave people unprepared for extreme weather. Concentrating mesh nodes in areas of high error could not only reduce error in the solution, but also better model phenomena that would ordinarily be smaller than the resolution of a mesh with the same number of points.
+
+\chapter{Introduction}
+    \section{Motivation}
+    \section{What Is Graph Theory?}
+    \section{Importance in AI and Data Science}
+    \section{Report Structure}
+
+\chapter{Fundamentals of Graph Theory}
+    \section{Basic Definitions}
+        \subsection{Graphs, Vertices, Edges}
+        \subsection{Degree, Paths, Cycles}
+        \subsection{Connectedness}
+        \subsection{Directed vs Undirected Graphs}
+        \subsection{Weighted Graphs}
+
+    \section{Types of Graphs}
+        \subsection{Simple Graphs}
+        \subsection{Multigraphs}
+        \subsection{Bipartite Graphs}
+        \subsection{Complete Graphs}
+        \subsection{Trees and Forests}
+        \subsection{Planar Graphs}
+
+    \section{Graph Representations}
+        \subsection{Adjacency Matrix}
+        \subsection{Adjacency List}
+        \subsection{Edge List}
+        \subsection{Incidence Matrix}
+
+\chapter{Classical Graph Algorithms}
+    \section{Traversal Algorithms}
+        \subsection{Depth-First Search (DFS)}
+        \subsection{Breadth-First Search (BFS)}
+
+    \section{Shortest Path Algorithms}
+        \subsection{Dijkstra’s Algorithm}
+        \subsection{Bellman–Ford}
+        \subsection{Floyd–Warshall}
+        \subsection{A* Search}
+
+    \section{Minimum Spanning Tree Algorithms}
+        \subsection{Kruskal’s Algorithm}
+        \subsection{Prim’s Algorithm}
+
+    \section{Network Flow}
+        \subsection{Max-Flow / Min-Cut}
+        \subsection{Ford–Fulkerson}
+        \subsection{Edmonds–Karp}
+
+    \section{Graph Matching}
+        \subsection{Maximum Matching}
+        \subsection{Bipartite Matching}
+        \subsection{Stable Matching}
+
+\chapter{Advanced Graph Theory Concepts}
+    \section{Graph Connectivity}
+        \subsection{Vertex and Edge Connectivity}
+        \subsection{Strong and Weak Connectivity}
+
+    \section{Graph Coloring}
+        \subsection{Chromatic Number}
+        \subsection{Applications of Coloring}
+
+    \section{Centrality Measures}
+        \subsection{Degree Centrality}
+        \subsection{Betweenness Centrality}
+        \subsection{Closeness Centrality}
+        \subsection{Eigenvector and PageRank}
+
+    \section{Spectral Graph Theory}
+        \subsection{Graph Laplacian}
+        \subsection{Eigenvalues and Eigenvectors}
+        \subsection{Spectral Clustering}
+
+    \section{Random Graphs}
+        \subsection{Erdős–Rényi Model}
+        \subsection{Small-World Networks}
+        \subsection{Scale-Free Networks}
+
+\chapter{Graph Theory in Machine Learning}
+    \section{Graph-Based Learning Paradigms}
+        \subsection{Transductive Learning}
+        \subsection{Semi-Supervised Learning}
+        \subsection{Graph Regularization}
+
+    \section{Feature Engineering with Graphs}
+        \subsection{Graph Embeddings}
+        \subsection{Node2Vec}
+        \subsection{DeepWalk}
+        \subsection{Graph Kernels}
+
+    \section{Graph Neural Networks (GNNs)}
+        \subsection{Message Passing Neural Networks}
+        \subsection{Graph Convolutional Networks (GCN)}
+        \subsection{Graph Attention Networks (GAT)}
+        \subsection{GraphSAGE}
+        \subsection{Training Challenges and Limitations}
+
+    \section{Explainability in GNNs}
+        \subsection{Subgraph Explanations}
+        \subsection{Feature Attribution}
+        \subsection{Global vs Local Explainability}
+
+\chapter{Applications of Graph Theory in Data Science}
+    \section{Social Network Analysis}
+        \subsection{Community Detection}
+        \subsection{Influence Propagation}
+        \subsection{Centrality for Influence Ranking}
+
+    \section{Recommendation Systems}
+        \subsection{Graph-Based Collaborative Filtering}
+        \subsection{Heterogeneous Information Networks}
+        \subsection{Knowledge Graphs}
+
+    \section{Natural Language Processing}
+        \subsection{Text as Graphs}
+        \subsection{Dependency Parsing Graphs}
+        \subsection{Graph Embeddings for NLP}
+
+    \section{Computer Vision}
+        \subsection{Scene Graphs}
+        \subsection{Graph-Based Image Segmentation}
+
+    \section{Fraud Detection}
+        \subsection{Transaction Networks}
+        \subsection{Anomaly Detection on Graphs}
+
+    \section{Biological and Chemical Graphs}
+        \subsection{Protein Interaction Networks}
+        \subsection{Molecular Graphs}
+        \subsection{Drug Discovery with GNNs}
+
+\chapter{Graph Databases and Large-Scale Graph Processing}
+    \section{Graph Database Models}
+        \subsection{Property Graph Model}
+        \subsection{RDF Model}
+
+    \section{Graph Query Languages}
+        \subsection{Cypher}
+        \subsection{SPARQL}
+        \subsection{Gremlin}
+
+    \section{Distributed Graph Systems}
+        \subsection{Apache Spark GraphX}
+        \subsection{Google Pregel Model}
+        \subsection{Graph Processing Frameworks}
+
+\chapter{Case Studies}
+    \section{Social Media User Classification}
+    \section{Traffic Prediction Using GNNs}
+    \section{Fraud Detection in Financial Networks}
+    \section{Drug Discovery Using Molecular Graph Learning}
+
+\chapter{Conclusion}
+    \section{Summary of Findings}
+    \section{Future Directions in Graph-Based AI}
+    \section{Limitations of Graph Methods}

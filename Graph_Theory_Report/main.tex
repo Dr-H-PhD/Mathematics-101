@@ -1,0 +1,215 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{tikz}
+\usetikzlibrary{positioning, shapes, arrows, calc}
+\usepackage{algpseudocode}  % For \Procedure, \EndProcedure
+\usepackage{algorithm}      % For algorithm environment
+
+% ========== PAGE LAYOUT ==========
+\geometry{left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm}
+
+% ========== HYPERREF SETUP ==========
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=cyan,
+	citecolor=green,
+	pdftitle={Mathematics for Data Science: Graph Theory and Applications},
+	pdfauthor={Student Name},
+	pdfsubject={Mathematics, Data Science, Graph Theory},
+	pdfkeywords={Graph Theory, Machine Learning, Data Science, Graph Neural Networks}
+}
+
+% ========== CODE LISTING COLORS ==========
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% ========== CODE LISTING STYLE ==========
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+\lstset{style=mystyle}
+
+% ========== THEOREM ENVIRONMENTS ==========
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{example}{Example}[chapter]
+\newtheorem{remark}{Remark}[chapter]
+
+% ========== CHAPTER/SECTION FORMATTING ==========
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries}
+{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{-30pt}{40pt}
+
+\titleformat{\section}
+{\normalfont\Large\bfseries}
+{\thesection}{1em}{}
+
+\titleformat{\subsection}
+{\normalfont\large\bfseries}
+{\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+{\normalfont\normalsize\bfseries}
+{\thesubsubsection}{1em}{}
+
+% ========== LINE SPACING ==========
+\renewcommand{\baselinestretch}{1.2}
+
+% ========== CUSTOM COMMANDS ==========
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\newcommand{\set}[1]{\mathbb{#1}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\graph}{\mathcal{G}}
+
+\begin{document}
+	
+	% ========== TITLE PAGE ==========
+\begin{titlepage}
+	\centering
+	
+	% ========== LOGO SECTION ==========
+	\IfFileExists{/Users/mac/Desktop/Mathematics-101/Graph_Theory_Report/images/ECE_LOGO_2021_web.png}{
+		\includegraphics[width=0.3\textwidth]{/Users/mac/Desktop/Mathematics-101/Graph_Theory_Report/images/ECE_LOGO_2021_web.png}\\[2cm]
+	}{
+		\vspace*{2cm}
+	}
+	
+	% ========== MAIN TITLE ==========
+	\rule{\textwidth}{1.5pt}\\[0.4cm]	
+\begin{center}
+	{\fontsize{36}{40}\selectfont \textbf{GRAPH THEORY}}\\
+\end{center}
+	\rule{\textwidth}{1.5pt}\\[2cm]
+\vspace{1cm}
+
+	
+	% ========== AUTHOR & SUPERVISOR ==========
+	\begin{minipage}[t]{0.45\textwidth}
+		\raggedright
+		\large
+		\textbf{AUTHORS:}\\[0.2cm]
+		\textbf{\textsc{-Anir Agountaf}}\\[0.5cm]
+		\textbf{\textsc{-Muhammad Hassaan Shafique}}\\
+		
+	\end{minipage}
+	\hfill
+	\vrule
+	\hfill
+	\begin{minipage}[t]{0.45\textwidth}
+		\raggedleft
+		\large
+		\textbf{PROFESSOR:}\\[0.2cm]
+		\textbf{M. \textsc{Soufian Benamor}}\\[0.5cm]
+		\normalsize
+		\textbf{COURSE:}\\
+		\small
+		Mathematics for Data Science
+		\normalsize
+		\textbf{PROGRAM:}\\
+		\small
+		Master of Science in Data Management
+	\end{minipage}
+	
+	% ========== SPACING ==========
+	\vfill
+	
+	% ========== SUBMISSION INFO ==========
+	\begin{center}
+		\rule{0.8\textwidth}{0.4pt}\\[0.5cm]
+		{\large \textbf{Academic Year 2025-2026}}\\[0.3cm]
+		{\large \textbf{Project Report}}\\[0.8cm]
+		{\Large \textbf{7 December 2025}}
+	\end{center}
+	
+	\vspace*{1cm}
+	
+\end{titlepage}
+	
+	% ========== ABSTRACT ==========
+	\chapter*{Abstract}
+	\addcontentsline{toc}{chapter}{Abstract}
+	Graph theory is a foundational area of discrete mathematics concerned with the study of networks formed by nodes (vertices) and the connections (edges) between them. This report provides an in-depth overview of core graph-theoretic concepts, including graph representations, connectivity, traversals, shortest-path algorithms, tree and cycle structures and properties of directed and weighted graphs. Beyond these fundamentals, the report emphasizes the growing relevance of graph theory in modern computational fields, particularly artificial intelligence (AI).
+	
+	In AI, graphs serve as powerful modeling tools for capturing complex relationships within data. Knowledge graphs represent structured information that supports reasoning and semantic understanding in intelligent systems. Graph algorithms enable efficient navigation and inference over these structures, contributing to advancements in natural language processing, recommendation systems and search technologies. Additionally, the emergence of graph-based machine learning methods---such as Graph Neural Networks (GNNs)---has expanded the role of graph theory in pattern recognition, social network analysis, molecular prediction and other areas where relational dependencies are critical.
+	
+	By examining both classical theory and contemporary AI applications, this project highlights how graph theory provides the mathematical framework necessary for representing, analyzing and learning from interconnected data. The report concludes that as AI systems increasingly rely on relational information, the importance of graph theory will continue to grow, bridging the gap between mathematical abstraction and real-world intelligent technologies.
+	
+	
+	\vspace{0.5cm}
+	\noindent\textbf{Keywords:} Graph Theory, Data Science, Artificial Intelligence, Graph Neural Networks, Network Analysis, Machine Learning, Algorithms
+	
+	% ========== TABLE OF CONTENTS ==========
+	\tableofcontents
+	\listoffigures
+	\addcontentsline{toc}{chapter}{List of Figures}
+	\listoftables
+	\addcontentsline{toc}{chapter}{List of Tables}
+	\listofalgorithms
+	\addcontentsline{toc}{chapter}{List of Algorithms}
+	
+	% ========== MAIN CONTENT ==========
+
+	
+	% Include all chapters from your original structure
+	\include{Chapter1.tex}  % Introduction
+	\include{Chapter2.tex}  % Fundamentals of Graph Theory
+	 \include{Chapter3.tex}  % Classical Graph Algorithms
+	 \include{Chapter4.tex}  % Advanced Graph Theory Concepts
+	 \include{Chapter5.tex}  % Graph Theory in Machine Learning
+	 \include{Chapter6.tex}  % Applications of Graph Theory in Data Science
+	 \include{Chapter7.tex}  % Graph Databases and Large-Scale Graph Processing
+	 \include{Chapter8.tex}  % Case Studies
+	 \include{Chapter9.tex}  % Conclusion
+	
+	% ========== BIBLIOGRAPHY ==========
+	\bibliographystyle{ieeetr}
+	\bibliography{references}
+	\addcontentsline{toc}{chapter}{Bibliography}
+	
+\end{document}

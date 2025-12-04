@@ -1,0 +1,43 @@
+\begin{titlepage}
+	\centering
+	
+	% Check if logo exists, otherwise skip
+	\IfFileExists{ECE_LOGO_2021_web.png}{
+		\includegraphics[width=0.4\textwidth]{ECE_LOGO_2021_web.png}\\[1.5cm]
+	}{
+		% No logo found, just add space
+		\vspace*{1.5cm}
+	}
+	
+	% University and department
+	\textsc{\LARGE University Name}\\[0.5cm]
+	\textsc{\Large Department of Computer Science/Mathematics}\\[2cm]
+	
+	% Title
+	\rule{\linewidth}{0.5mm}\\[0.4cm]
+	{\huge \bfseries Mathematics for Data Science: \\ Graph Theory and Its Applications}\\[0.4cm]
+	\rule{\linewidth}{0.5mm}\\[2cm]
+	
+	% Author
+	\begin{minipage}{0.4\textwidth}
+		\begin{flushleft} \large
+			\emph{Author:}\\
+			Your \textsc{Name}\\
+			Student ID: 12345678
+		\end{flushleft}
+	\end{minipage}
+	~
+	\begin{minipage}{0.4\textwidth}
+		\begin{flushright} \large
+			\emph{Supervisor:} \\
+			Prof. \textsc{Name}\\
+			\emph{Course:} \\
+			Course Name/Code
+		\end{flushright}
+	\end{minipage}\\[2cm]
+	
+	% Date
+	{\large \today}\\[2cm]
+	
+	\vfill
+\end{titlepage}

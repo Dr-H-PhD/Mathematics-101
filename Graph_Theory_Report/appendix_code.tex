@@ -1,0 +1,88 @@
+\chapter{Code Implementations}
+\label{app:code}
+
+\section{Graph Algorithm Implementations in Python}
+
+\subsection{Graph Class Implementation}
+\begin{lstlisting}[language=Python, caption=Basic Graph Class]
+	class Graph:
+	def __init__(self, directed=False):
+	self.adj_list = {}
+	self.directed = directed
+	self.vertices = set()
+	
+	def add_vertex(self, vertex):
+	if vertex not in self.adj_list:
+	self.adj_list[vertex] = []
+	self.vertices.add(vertex)
+	
+	def add_edge(self, u, v, weight=1):
+	self.add_vertex(u)
+	self.add_vertex(v)
+	self.adj_list[u].append((v, weight))
+	if not self.directed:
+	self.adj_list[v].append((u, weight))
+	
+	def get_neighbors(self, vertex):
+	return self.adj_list.get(vertex, [])
+	
+	def vertices(self):
+	return list(self.vertices)
+	
+	def edges(self):
+	edges = []
+	for u in self.adj_list:
+	for v, w in self.adj_list[u]:
+	edges.append((u, v, w))
+	return edges
+\end{lstlisting}
+
+\subsection{Breadth-First Search}
+\begin{lstlisting}[language=Python, caption=BFS Implementation]
+	from collections import deque
+	
+	def bfs(graph, start):
+	visited = set()
+	queue = deque([start])
+	visited.add(start)
+	order = []
+	
+	while queue:
+	vertex = queue.popleft()
+	order.append(vertex)
+	
+	for neighbor, _ in graph.get_neighbors(vertex):
+	if neighbor not in visited:
+	visited.add(neighbor)
+	queue.append(neighbor)
+	
+	return order
+\end{lstlisting}
+
+\subsection{Dijkstra's Algorithm}
+\begin{lstlisting}[language=Python, caption=Dijkstra's Shortest Path]
+	import heapq
+	
+	def dijkstra(graph, start):
+	distances = {v: float('inf') for v in graph.vertices()}
+	distances[start] = 0
+	prev = {v: None for v in graph.vertices()}
+	
+	pq = [(0, start)]
+	
+	while pq:
+	current_dist, current = heapq.heappop(pq)
+	
+	if current_dist > distances[current]:
+	continue
+	
+	for neighbor, weight in graph.get_neighbors(current):
+	distance = current_dist + weight
+	
+	if distance < distances[neighbor]:
+	distances[neighbor] = distance
+	prev[neighbor] = current
+	heapq.heappush(pq, (distance, neighbor))
+	
+	return distances, prev
+\end{lstlisting}

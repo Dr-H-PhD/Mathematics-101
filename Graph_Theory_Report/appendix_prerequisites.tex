@@ -1,0 +1,63 @@
+\chapter{Mathematical Prerequisites}
+\label{app:prerequisites}
+
+\section{Linear Algebra Essentials}
+\subsection{Vectors and Matrices}
+\begin{itemize}
+	\item \textbf{Vectors:} $\mathbf{v} \in \mathbb{R}^n$, operations: addition, scalar multiplication, dot product
+	\item \textbf{Matrices:} $\mathbf{A} \in \mathbb{R}^{m \times n}$, operations: addition, multiplication, transpose
+	\item \textbf{Matrix Properties:} Symmetric, diagonal, identity, zero matrices
+\end{itemize}
+
+\subsection{Eigenvalues and Eigenvectors}
+For a square matrix $\mathbf{A} \in \mathbb{R}^{n \times n}$:
+\begin{itemize}
+	\item $\lambda$ is an eigenvalue if $\mathbf{A}\mathbf{v} = \lambda\mathbf{v}$ for some non-zero $\mathbf{v}$
+	\item $\mathbf{v}$ is the corresponding eigenvector
+	\item Spectral decomposition: $\mathbf{A} = \mathbf{Q}\mathbf{\Lambda}\mathbf{Q}^{-1}$
+\end{itemize}
+
+\subsection{Matrix Norms}
+\begin{itemize}
+	\item Frobenius norm: $\|\mathbf{A}\|_F = \sqrt{\sum_{i,j} a_{ij}^2}$
+	\item Spectral norm: $\|\mathbf{A}\|_2 = \max_{\|\mathbf{x}\|=1} \|\mathbf{A}\mathbf{x}\|$
+\end{itemize}
+
+\section{Probability and Statistics Basics}
+\subsection{Random Variables}
+\begin{itemize}
+	\item Discrete and continuous random variables
+	\item Probability distributions: Bernoulli, Binomial, Normal, Uniform
+	\item Expected value, variance, covariance
+\end{itemize}
+
+\subsection{Statistical Measures}
+\begin{itemize}
+	\item Mean, median, mode
+	\item Standard deviation, variance
+	\item Correlation coefficients
+\end{itemize}
+
+\section{Complexity Notation}
+\subsection{Big O Notation}
+\begin{definition}[Big O]
+	$f(n) = O(g(n))$ if $\exists c > 0, n_0 > 0$ such that $0 \leq f(n) \leq c \cdot g(n)$ for all $n \geq n_0$.
+\end{definition}
+
+\subsection{Common Complexity Classes}
+\begin{itemize}
+	\item Constant: $O(1)$
+	\item Logarithmic: $O(\log n)$
+	\item Linear: $O(n)$
+	\item Linearithmic: $O(n \log n)$
+	\item Quadratic: $O(n^2)$
+	\item Cubic: $O(n^3)$
+	\item Exponential: $O(2^n)$
+\end{itemize}
+
+\subsection{Algorithm Analysis}
+\begin{itemize}
+	\item Time complexity: Measures running time as function of input size
+	\item Space complexity: Measures memory usage as function of input size
+	\item Worst-case vs average-case analysis
+\end{itemize}

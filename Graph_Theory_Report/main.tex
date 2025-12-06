@@ -19,7 +19,6 @@
 \usepackage{listings}
 \usepackage{float}
 \usepackage{algorithm}
-\usepackage{algorithmic}
 \usepackage{tikz}
 \usetikzlibrary{positioning, shapes, arrows, calc}
 \usepackage{algpseudocode}  % For \Procedure, \EndProcedure
@@ -201,15 +200,13 @@
 	\include{Chapter2.tex}  % Fundamentals of Graph Theory
 	 \include{Chapter3.tex}  % Classical Graph Algorithms
 	 \include{Chapter4.tex}  % Advanced Graph Theory Concepts
-	 \include{Chapter5.tex}  % Graph Theory in Machine Learning
-	 \include{Chapter6.tex}  % Applications of Graph Theory in Data Science
-	 \include{Chapter7.tex}  % Graph Databases and Large-Scale Graph Processing
-	 \include{Chapter8.tex}  % Case Studies
-	 \include{Chapter9.tex}  % Conclusion
-	
+	 \include{Chapter5.tex}  % Conclusion
+
 	% ========== BIBLIOGRAPHY ==========
-	\bibliographystyle{ieeetr}
-	\bibliography{references}
-	\addcontentsline{toc}{chapter}{Bibliography}
-	
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliographystyle{ieeetr}
+\bibliography{references}
+
 \end{document}

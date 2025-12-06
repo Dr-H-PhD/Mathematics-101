@@ -1,24 +1,92 @@
-\chapter{Graph Theory in Machine Learning}
+\chapter{Advanced Topics and Future Trends}
+\label{ch:advanced}
 
-\section{Graph-Based Learning Paradigms}
-\subsection{Transductive Learning}
-\subsection{Semi-Supervised Learning}
-\subsection{Graph Regularization}
+As graph-based data becomes increasingly common, advanced topics have emerged to address scalability, expressiveness and dynamic behavior.
 
-\section{Feature Engineering with Graphs}
-\subsection{Graph Embeddings}
-\subsection{Node2Vec}
-\subsection{DeepWalk}
-\subsection{Graph Kernels}
+% ---------------------------------------------------------
+\section{Graph Databases}
 
-\section{Graph Neural Networks (GNNs)}
-\subsection{Message Passing Neural Networks}
-\subsection{Graph Convolutional Networks (GCN)}
-\subsection{Graph Attention Networks (GAT)}
-\subsection{GraphSAGE}
-\subsection{Training Challenges and Limitations}
+Graph databases store data as interconnected entities, enabling fast traversal and pattern matching.  
+Systems like Neo4j and TigerGraph support the Cypher and GSQL languages:
+\[
+\texttt{MATCH (u)-[:LIKES]->(i) RETURN i}.
+\]
 
-\section{Explainability in GNNs}
-\subsection{Subgraph Explanations}
-\subsection{Feature Attribution}
-\subsection{Global vs Local Explainability}
+They support recommendation systems, identity resolution and enterprise knowledge management.
+
+% ---------------------------------------------------------
+\section{Hypergraphs}
+
+Hypergraphs generalize edges to connect multiple vertices:
+\[
+e = \{v_1, v_2, \dots, v_k\}.
+\]
+
+They model group interactions such as group chats, co-authorship networks and multi-protein complexes.
+
+% ---------------------------------------------------------
+\section{Temporal and Dynamic Graphs}
+
+Many real networks evolve over time:  
+new users join, edges appear/disappear and weights change.
+
+Dynamic graph models capture:
+\begin{itemize}
+	\item evolving social relationships,
+	\item time-varying traffic networks,
+	\item real-time financial networks.
+\end{itemize}
+
+% ---------------------------------------------------------
+\section{Graph Signal Processing (GSP)}
+
+GSP extends signal processing tools to graph-structured data.
+
+Graph Laplacian:
+\[
+L = D - A.
+\]
+
+Graph Fourier Transform:
+\[
+\hat{x} = U^T x,
+\]
+where $U$ contains Laplacian eigenvectors.
+
+Used in sensor networks, recommendation systems and denoising.
+
+% ---------------------------------------------------------
+\section{Scalable Graph Computing}
+
+Handling billions of edges requires distributed frameworks like:
+
+\begin{itemize}
+	\item Apache Spark GraphX,
+	\item Google Pregel,
+	\item DGL and PyTorch Geometric for GNNs.
+\end{itemize}
+
+These systems enable industrial-scale graph analytics.
+
+% ---------------------------------------------------------
+\section{Future Trends}
+
+Emerging research topics include:
+
+\begin{itemize}
+	\item \textbf{Explainable GNNs} — interpreting learned patterns.
+	\item \textbf{Neural-symbolic systems} combining logic and ML.
+	\item \textbf{Real-time graph learning} for streaming data.
+	\item \textbf{Foundational graph models} analogous to LLMs.
+\end{itemize}
+
+% ---------------------------------------------------------
+\section{Summary}
+
+Advanced graph techniques support scalable, expressive and dynamic graph analytics essential to next-generation AI systems.
+
+\section{Conclusion}
+
+Graph theory offers a powerful mathematical framework for representing interconnected data, making it indispensable in modern data science. In this report, we explored fundamental graph concepts, classical algorithms, spectral methods and cutting-edge applications such as Graph Neural Networks and knowledge graphs. These methods enable us to capture relationships that cannot be modeled using traditional vector-based approaches. Classical algorithms like BFS, DFS, Dijkstra and MSTs continue to serve as essential building blocks for network analysis, optimization and search systems. At the same time, advanced topics including Laplacian eigenvectors, random walks and neural message passing highlight how graph theory is shaping the next generation of artificial intelligence tools.
+
+As data becomes increasingly relational—whether through social networks, communication networks, molecular structures or web graphs—the significance of graph-based modeling will only continue to grow. GNNs and knowledge graphs already demonstrate how graph theory enables deeper reasoning, more effective predictions and richer representations. The field stands at the crossroads of mathematics, computer science and intelligent systems and its influence will only intensify in the coming years. Understanding graph theory is therefore not only academically valuable but also essential for building robust, scalable and intelligent data-driven technologies.

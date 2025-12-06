@@ -1,25 +1,50 @@
 \chapter{Advanced Graph Theory Concepts}
 
-\section{Graph Connectivity}
-\subsection{Vertex and Edge Connectivity}
-\subsection{Strong and Weak Connectivity}
-
-\section{Graph Coloring}
-\subsection{Chromatic Number}
-\subsection{Applications of Coloring}
-
-\section{Centrality Measures}
-\subsection{Degree Centrality}
-\subsection{Betweenness Centrality}
-\subsection{Closeness Centrality}
-\subsection{Eigenvector and PageRank}
+This chapter covers modern graph concepts highly relevant to machine learning and data science.
 
 \section{Spectral Graph Theory}
-\subsection{Graph Laplacian}
-\subsection{Eigenvalues and Eigenvectors}
-\subsection{Spectral Clustering}
 
-\section{Random Graphs}
-\subsection{Erdős–Rényi Model}
-\subsection{Small-World Networks}
-\subsection{Scale-Free Networks}
+Spectral graph theory studies the eigenvalues and eigenvectors of matrices such as the Laplacian:
+\[
+L = D - A.
+\]
+
+The second-smallest eigenvalue $\lambda_2$, known as the \textbf{Fiedler value}, measures graph connectivity.
+
+\section{Random Walks on Graphs}
+
+Random walks are used in:
+\begin{itemize}
+	\item PageRank \cite{brin1998pagerank}
+	\item Node2Vec embeddings
+	\item Semi-supervised learning on graphs
+\end{itemize}
+
+\[
+P_{ij} = \frac{A_{ij}}{\deg(i)}.
+\]
+
+\section{Graph Neural Networks (GNNs)}
+
+GNNs generalize convolution to irregular graph domains.  
+A typical GCN layer \cite{kipf2017semi} is:
+
+\[
+H^{(l+1)} = \sigma\left( \tilde{D}^{-1/2}\tilde{A}\tilde{D}^{-1/2} H^{(l)} W^{(l)} \right).
+\]
+
+Applications:
+\begin{itemize}
+	\item Molecule property prediction
+	\item Fraud detection
+	\item Recommender systems
+\end{itemize}
+
+\section{Knowledge Graphs}
+
+Knowledge graphs represent semantic relationships using triples:
+\[
+(h, r, t)
+\]
+where $h$ is the head entity, $t$ is the tail and $r$ is the relation.  
+They power modern AI systems including Google Knowledge Graph and large language models.

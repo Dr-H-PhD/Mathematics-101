@@ -1,208 +1,116 @@
 \chapter{Fundamentals of Graph Theory}
-\label{chap:fundamentals}
+
+This chapter establishes the mathematical foundations needed to work with graph structures in data science. It introduces formal graph definitions, graph types, matrix representations and key structural concepts such as degree, connectivity and cycles.
 
 \section{Basic Definitions}
-\subsection{Graphs, Vertices, Edges}
-\begin{definition}[Graph]
-	A \textbf{graph} $G$ is an ordered pair $(V, E)$ where:
-	\begin{itemize}
-		\item $V$ is a set of \textbf{vertices} (or nodes)
-		\item $E \subseteq \{\{u, v\} \mid u, v \in V, u \neq v\}$ is a set of \textbf{edges} (or links)
-	\end{itemize}
-	For a graph with $n$ vertices and $m$ edges, we denote $|V| = n$ and $|E| = m$.
+
+\begin{definition}
+	A \textbf{graph} is an ordered pair $\graph=(V,E)$ where:
+	\[
+	V=\{v_1,\ldots,v_n\} \quad \text{and} \quad E \subseteq V \times V.
+	\]
 \end{definition}
 
-\begin{definition}[Directed Graph]
-	A \textbf{directed graph} (or digraph) $D = (V, A)$ consists of:
-	\begin{itemize}
-		\item $V$: set of vertices
-		\item $A \subseteq \{(u, v) \mid u, v \in V, u \neq v\}$: set of \textbf{arcs} (directed edges)
-	\end{itemize}
-	Each arc $(u, v)$ has a direction from $u$ (tail) to $v$ (head).
-\end{definition}
+Edges may be \textbf{directed}, \textbf{undirected}, \textbf{weighted} or \textbf{unweighted}.  
+Applications like social networks typically use undirected graphs, while recommendation systems or web link structures use directed, weighted graphs \cite{newman2010networks}.
 
-\subsection{Degree, Paths, Cycles}
-\begin{definition}[Degree]
-	The \textbf{degree} of a vertex $v$, denoted $\deg(v)$, is the number of edges incident to $v$. For directed graphs:
-	\begin{itemize}
-		\item $\text{indeg}(v)$: number of arcs entering $v$
-		\item $\text{outdeg}(v)$: number of arcs leaving $v$
-	\end{itemize}
-\end{definition}
+\section{Degree and Neighborhood}
 
-\begin{definition}[Path]
-	A \textbf{path} is a sequence of vertices $v_0, v_1, \dots, v_k$ such that $(v_i, v_{i+1}) \in E$ for $i = 0, \dots, k-1$. The \textbf{length} of the path is $k$ (number of edges).
-\end{definition}
+For an undirected graph:
+\[
+\deg(v) = |\{u \in V : (u,v)\in E\}|.
+\]
 
-\begin{definition}[Cycle]
-	A \textbf{cycle} is a path $v_0, v_1, \dots, v_k$ where $v_0 = v_k$ and all other vertices are distinct.
-\end{definition}
-
-\subsection{Connectedness}
-\begin{definition}[Connected Graph]
-	An undirected graph is \textbf{connected} if there exists a path between every pair of vertices.
-\end{definition}
-
-\begin{definition}[Connected Components]
-	A \textbf{connected component} of a graph is a maximal connected subgraph.
-\end{definition}
-
-\section{Types of Graphs}
-\subsection{Simple Graphs}
-\begin{definition}[Simple Graph]
-	A \textbf{simple graph} is an undirected graph without loops (edges connecting a vertex to itself) and without multiple edges between the same pair of vertices.
-\end{definition}
-
-\subsection{Multigraphs}
-\begin{definition}[Multigraph]
-	A \textbf{multigraph} allows multiple edges between the same pair of vertices.
-\end{definition}
-
-\subsection{Bipartite Graphs}
-\begin{definition}[Bipartite Graph]
-	A graph $G = (V, E)$ is \textbf{bipartite} if $V$ can be partitioned into two disjoint sets $U$ and $W$ such that every edge connects a vertex in $U$ to a vertex in $W$.
-\end{definition}
-
-\begin{theorem}[Characterization of Bipartite Graphs]
-	A graph is bipartite if and only if it contains no odd cycles.
-\end{theorem}
-
-\subsection{Complete Graphs}
-\begin{definition}[Complete Graph]
-	A \textbf{complete graph} $K_n$ is a simple graph with $n$ vertices where every pair of distinct vertices is connected by an edge.
-\end{definition}
-
-\subsection{Trees and Forests}
-\begin{definition}[Tree]
-	A \textbf{tree} is a connected graph with no cycles.
-\end{definition}
-
-\begin{theorem}[Tree Properties]
-	For a tree $T = (V, E)$ with $n$ vertices:
-	\begin{enumerate}
-		\item $|E| = n - 1$
-		\item There is exactly one path between any two vertices
-		\item Adding any edge creates exactly one cycle
-		\item Removing any edge disconnects the graph
-	\end{enumerate}
-\end{theorem}
-
-\subsection{Planar Graphs}
-\begin{definition}[Planar Graph]
-	A graph is \textbf{planar} if it can be drawn in the plane without edge crossings.
-\end{definition}
-
-\begin{theorem}[Euler's Formula]
-	For a connected planar graph with $n$ vertices, $m$ edges, and $f$ faces:
-	\[ n - m + f = 2 \]
-\end{theorem}
+For a directed graph:
+\[
+\deg^+(v)=\text{out-degree}, \qquad \deg^-(v)=\text{in-degree}.
+\]
 
 \section{Graph Representations}
+
+Graphs can be represented in multiple ways.
+
 \subsection{Adjacency Matrix}
-The \textbf{adjacency matrix} $A$ of a graph $G = (V, E)$ with $n$ vertices is an $n \times n$ matrix where:
-\[ A_{ij} = \begin{cases}
-	1 & \text{if } (i, j) \in E \\
-	0 & \text{otherwise}
-\end{cases} \]
 
-For weighted graphs, $A_{ij} = w(i, j)$ where $w(i, j)$ is the weight of edge $(i, j)$.
+\[
+A_{ij} = 
+\begin{cases}
+	1 & \text{if } (v_i,v_j)\in E,\\
+	0 & \text{otherwise.}
+\end{cases}
+\]
 
-\begin{example}
-	For the graph with vertices $\{1,2,3\}$ and edges $\{(1,2), (2,3), (3,1)\}$:
-	\[ A = \begin{pmatrix}
-		0 & 1 & 1 \\
-		1 & 0 & 1 \\
-		1 & 1 & 0
-	\end{pmatrix} \]
-\end{example}
+\begin{table}[H]
+	\centering
+	\caption{Adjacency Matrix of a Simple Graph}
+	\begin{tabular}{c|cccc}
+		& A & B & C & D \\
+		\hline
+		A & 0 & 1 & 1 & 0 \\
+		B & 1 & 0 & 1 & 1 \\
+		C & 1 & 1 & 0 & 1 \\
+		D & 0 & 1 & 1 & 0 \\
+	\end{tabular}
+\end{table}
 
 \subsection{Adjacency List}
-An \textbf{adjacency list} stores for each vertex a list of its neighbors:
-\begin{itemize}
-	\item Space complexity: $O(n + m)$
-	\item Efficient for sparse graphs
-	\item Easy to iterate over neighbors
-\end{itemize}
 
-\subsection{Edge List}
-An \textbf{edge list} simply stores all edges as pairs of vertices:
-\begin{itemize}
-	\item Space complexity: $O(m)$
-	\item Simple implementation
-	\item Inefficient for neighbor queries
-\end{itemize}
+For sparse graphs, adjacency lists are far more memory-efficient.
 
-\subsection{Incidence Matrix}
-The \textbf{incidence matrix} $B$ of a graph $G = (V, E)$ is an $n \times m$ matrix where:
-\[ B_{ij} = \begin{cases}
-	1 & \text{if vertex } i \text{ is incident to edge } j \\
-	0 & \text{otherwise}
-\end{cases} \]
+\section{Graph Traversal Algorithms}
 
-\section{Weighted Graphs}
-\begin{definition}[Weighted Graph]
-	A \textbf{weighted graph} $G = (V, E, w)$ assigns a weight $w(e) \in \mathbb{R}$ to each edge $e \in E$.
-\end{definition}
+Traversal algorithms are essential in data science — from exploring social networks to crawling web graphs.
 
-Applications include:
-\begin{itemize}
-	\item Transportation networks (distances/travel times)
-	\item Communication networks (bandwidth/cost)
-	\item Social networks (strength of relationships)
-\end{itemize}
+Below are corrected versions of BFS and DFS in proper algorithm floats.
+
+\begin{algorithm}[H]
+	\caption{Breadth-First Search (BFS)}
+	\begin{algorithmic}[1]
+		\Procedure{BFS}{$G, s$}
+		\State mark $s$ as visited
+		\State enqueue $s$
+		\While{queue not empty}
+		\State $v \gets$ dequeue()
+		\For{each neighbor $u$ of $v$}
+		\If{$u$ not visited}
+		\State mark $u$
+		\State enqueue $u$
+		\EndIf
+		\EndFor
+		\EndWhile
+		\EndProcedure
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+	\caption{Depth-First Search (DFS)}
+	\begin{algorithmic}[1]
+		\Procedure{DFS}{$G, v$}
+		\State mark $v$ as visited
+		\For{each neighbor $u$ of $v$}
+		\If{$u$ not visited}
+		\State DFS($G,u$)
+		\EndIf
+		\EndFor
+		\EndProcedure
+	\end{algorithmic}
+\end{algorithm}
 
 \section{Connectivity and Components}
-\subsection{Vertex Connectivity}
-\begin{definition}[k-Connected]
-	A graph is \textbf{k-connected} if removing fewer than $k$ vertices does not disconnect it.
-\end{definition}
 
-\subsection{Edge Connectivity}
-\begin{definition}[k-Edge-Connected]
-	A graph is \textbf{k-edge-connected} if removing fewer than $k$ edges does not disconnect it.
-\end{definition}
+A graph is \textbf{connected} if every pair of vertices is linked by some path.  
+Connected components can be identified efficiently with BFS or DFS.
 
-\section{Special Graph Families}
-\subsection{Regular Graphs}
-\begin{definition}[Regular Graph]
-	A graph is \textbf{k-regular} if every vertex has degree $k$.
-\end{definition}
+\[
+\text{Number of connected components} = k
+\]
 
-\subsection{Cayley Graphs}
-\begin{definition}[Cayley Graph]
-	Given a group $G$ and a generating set $S$, the \textbf{Cayley graph} has vertices corresponding to group elements and edges $(g, gs)$ for $g \in G, s \in S$.
-\end{definition}
+\section{Cycles and Trees}
 
-\section{Planar Graphs}
-\subsection{Kuratowski's Theorem}
-\begin{theorem}[Kuratowski, 1930]
-	A graph is planar if and only if it does not contain a subdivision of $K_5$ or $K_{3,3}$.
-\end{theorem}
+A \textbf{tree} is a connected, acyclic graph.  
+Fundamental property:
+\[
+\text{A tree with } n \text{ vertices has } n-1 \text{ edges.}
+\]
 
-\subsection{Four Color Theorem}
-\begin{theorem}[Four Color Theorem]
-	Every planar graph can be colored with at most 4 colors such that no adjacent vertices share the same color.
-\end{theorem}
-
-\section{Cliques}
-\begin{definition}[Clique]
-	A \textbf{clique} is a subset of vertices such that every two distinct vertices are adjacent.
-\end{definition}
-
-\begin{definition}[Clique Number]
-	The \textbf{clique number} $\omega(G)$ is the size of the largest clique in $G$.
-\end{definition}
-
-\section{Independent Sets}
-\begin{definition}[Independent Set]
-	An \textbf{independent set} is a subset of vertices such that no two vertices are adjacent.
-\end{definition}
-
-\begin{definition}[Independence Number]
-	The \textbf{independence number} $\alpha(G)$ is the size of the largest independent set in $G$.
-\end{definition}
-
-\begin{theorem}[Relationship]
-	For any graph $G$ with $n$ vertices:
-	\[ \omega(G) \cdot \alpha(G) \geq n \]
-\end{theorem}
+Trees are widely used in machine learning (e.g., decision trees, hierarchical clustering).

@@ -1,346 +1,79 @@
-\chapter{Classical Graph Algorithms}
-\label{chap:algorithms}
+\chapter{Network Science and Complex Networks}
+\label{ch:networkscience}
 
-\section{Traversal Algorithms}
-Graph traversal algorithms form the foundation for many other graph algorithms, enabling systematic exploration of graph structures.
+Network science extends classical graph theory to the study of large, real-world networks.  
+Such networks often exhibit properties like clustering, heavy-tailed degree distributions, and small-world behavior \cite{newman2010networks}.
 
-\subsection{Depth-First Search (DFS)}
-Depth-First Search explores as far as possible along each branch before backtracking.
+% ---------------------------------------------------------
+\section{Random Graph Models}
 
-\begin{algorithm}[H]
-	\caption{Depth-First Search (Recursive)}
-	\begin{algorithmic}[1]
-		\Function{DFS}{$G$, $v$}
-		\State Mark $v$ as visited
-		\For{each neighbor $u$ of $v$ in $G$}
-		\If{$u$ is not visited}
-		\State \Call{DFS}{$G$, $u$}
-		\EndIf
-		\EndFor
-		\EndFunction
-	\end{algorithmic}
-\end{algorithm}
+\subsection{Erdős–Rényi Model}
 
-\textbf{Properties:}
-\begin{itemize}
-	\item Time Complexity: $O(|V| + |E|)$
-	\item Space Complexity: $O(|V|)$ for recursion stack
-	\item Applications: Topological sorting, connected components, cycle detection
-\end{itemize}
+In the $G(n,p)$ model, each pair of vertices is connected with probability $p$.  
+This simple model facilitates theoretical analysis but rarely matches real data.
 
-\subsection{Breadth-First Search (BFS)}
-Breadth-First Search explores all vertices at the present depth level before moving to vertices at the next depth level.
+\subsection{Watts–Strogatz Model}
 
-\begin{algorithm}[H]
-	\caption{Breadth-First Search}
-	\begin{algorithmic}[1]
-		\Function{BFS}{$G$, $s$}
-		\State Create queue $Q$
-		\State Mark $s$ as visited
-		\State $Q$.enqueue($s$)
-		\While{$Q$ is not empty}
-		\State $v \gets Q$.dequeue()
-		\For{each neighbor $u$ of $v$ in $G$}
-		\If{$u$ is not visited}
-		\State Mark $u$ as visited
-		\State $Q$.enqueue($u$)
-		\EndIf
-		\EndFor
-		\EndWhile
-		\EndFunction
-	\end{algorithmic}
-\end{algorithm}
+Designed to reproduce the ``small-world'' phenomenon:  
+high clustering and short path lengths are typical of social systems.
 
-\textbf{Properties:}
-\begin{itemize}
-	\item Time Complexity: $O(|V| + |E|)$
-	\item Space Complexity: $O(|V|)$ for queue
-	\item Applications: Shortest path in unweighted graphs, peer-to-peer networks
-\end{itemize}
+\subsection{Barabási–Albert Model}
 
-\section{Shortest Path Algorithms}
-Shortest path algorithms find the minimum-weight path between vertices in a graph.
+Models scale-free networks where degree distributions follow a power law:
+\[
+P(k) \propto k^{-3}.
+\]
 
-\subsection{Dijkstra's Algorithm}
-Dijkstra's algorithm finds shortest paths from a source vertex in graphs with non-negative edge weights.
+Such networks arise in the web graph, biological systems, and city transportation \cite{barabasi2016network}.
 
-\begin{algorithm}[H]
-	\caption{Dijkstra's Algorithm}
-	\begin{algorithmic}[1]
-		\Function{Dijkstra}{$G$, $s$}
-		\State Initialize distances $d[s] \gets 0$, $d[v] \gets \infty$ for $v \neq s$
-		\State Initialize priority queue $Q$ with all vertices
-		\While{$Q$ is not empty}
-		\State $u \gets Q$.extract\_min()
-		\For{each neighbor $v$ of $u$}
-		\State $alt \gets d[u] + w(u, v)$
-		\If{$alt < d[v]$}
-		\State $d[v] \gets alt$
-		\State $prev[v] \gets u$
-		\State $Q$.decrease\_key($v$, $alt$)
-		\EndIf
-		\EndFor
-		\EndWhile
-		\State \Return $d$, $prev$
-		\EndFunction
-	\end{algorithmic}
-\end{algorithm}
+% ---------------------------------------------------------
+\section{Centrality Measures}
 
-\textbf{Complexity:} $O((|V|+|E|)\log|V|)$ with binary heap
+Centrality quantifies importance of nodes in a network.
 
-\subsection{Bellman-Ford Algorithm}
-Bellman-Ford handles graphs with negative edge weights and detects negative-weight cycles.
+\subsection{Degree Centrality}
 
-\begin{algorithm}[H]
-	\caption{Bellman-Ford Algorithm}
-	\begin{algorithmic}[1]
-		\Function{BellmanFord}{$G$, $s$}
-		\State Initialize distances $d[s] \gets 0$, $d[v] \gets \infty$ for $v \neq s$
-		\For{$i \gets 1$ to $|V|-1$}
-		\For{each edge $(u, v)$ in $E$ with weight $w$}
-		\If{$d[u] + w < d[v]$}
-		\State $d[v] \gets d[u] + w$
-		\State $prev[v] \gets u$
-		\EndIf
-		\EndFor
-		\EndFor
-		\For{each edge $(u, v)$ in $E$ with weight $w$}
-		\If{$d[u] + w < d[v]$}
-		\State \Return "Graph contains negative weight cycle"
-		\EndIf
-		\EndFor
-		\State \Return $d$, $prev$
-		\EndFunction
-	\end{algorithmic}
-\end{algorithm}
+Measures local influence:
+\[
+C_D(v) = \deg(v).
+\]
 
-\textbf{Complexity:} $O(|V||E|)$
+\subsection{Closeness Centrality}
 
-\subsection{Floyd-Warshall Algorithm}
-Floyd-Warshall computes all-pairs shortest paths in a weighted graph.
+Measures how close a node is to others:
+\[
+C_C(v) = \frac{1}{\sum_{u} d(v,u)}.
+\]
 
-\begin{algorithm}[H]
-	\caption{Floyd-Warshall Algorithm}
-	\begin{algorithmic}[1]
-		\Function{FloydWarshall}{$W$}
-		\State $D \gets W$
-		\For{$k \gets 1$ to $n$}
-		\For{$i \gets 1$ to $n$}
-		\For{$j \gets 1$ to $n$}
-		\If{$D[i][k] + D[k][j] < D[i][j]$}
-		\State $D[i][j] \gets D[i][k] + D[k][j]$
-		\EndIf
-		\EndFor
-		\EndFor
-		\EndFor
-		\State \Return $D$
-		\EndFunction
-	\end{algorithmic}
-\end{algorithm}
+\subsection{Betweenness Centrality}
 
-\textbf{Complexity:} $O(|V|^3)$ time, $O(|V|^2)$ space
+Measures how often a node lies on shortest paths:
+\[
+C_B(v) = \sum_{s,t} \frac{\sigma_{st}(v)}{\sigma_{st}}.
+\]
 
-\subsection{A* Search Algorithm}
-A* is an informed search algorithm that uses heuristics to improve performance.
+\subsection{Eigenvector Centrality and PageRank}
 
-\begin{algorithm}[H]
-	\caption{A* Search Algorithm}
-	\begin{algorithmic}[1]
-		\Function{AStar}{$G$, $start$, $goal$}
-		\State Initialize open set with $start$, $g[start] \gets 0$, $f[start] \gets h(start)$
-		\While{open set is not empty}
-		\State $current \gets$ node in open set with lowest $f$
-		\If{$current = goal$}
-		\State \Return reconstruct path
-		\EndIf
-		\State Remove $current$ from open set
-		\For{each neighbor $v$ of $current$}
-		\State $tentative\_g \gets g[current] + w(current, v)$
-		\If{$tentative\_g < g[v]$}
-		\State $g[v] \gets tentative\_g$
-		\State $f[v] \gets g[v] + h(v)$
-		\State $prev[v] \gets current$
-		\If{$v$ not in open set}
-		\State Add $v$ to open set
-		\EndIf
-		\EndIf
-		\EndFor
-		\EndWhile
-		\State \Return failure
-		\EndFunction
-	\end{algorithmic}
-\end{algorithm}
+Eigenvector centrality measures influence recursively:  
+high-scoring nodes connect to high-scoring neighbors.  
+PageRank modifies this with damping for web ranking \cite{brin1998anatomy}.
 
-\section{Minimum Spanning Tree Algorithms}
-MST algorithms find a subset of edges that connects all vertices with minimum total edge weight.
+% ---------------------------------------------------------
+\section{Community Detection}
 
-\subsection{Kruskal's Algorithm}
-Kruskal's algorithm builds MST by sorting edges and adding them in increasing weight order.
+Communities are densely connected node groups.
 
-\begin{algorithm}[H]
-	\caption{Kruskal's Algorithm}
-	\begin{algorithmic}[1]
-		\Function{Kruskal}{$G$}
-		\State Sort edges by weight in non-decreasing order
-		\State Initialize disjoint-set data structure for vertices
-		\State $mst \gets \emptyset$
-		\For{each edge $(u, v)$ in sorted order}
-		\If{$\text{find}(u) \neq \text{find}(v)$}
-		\State Add $(u, v)$ to $mst$
-		\State $\text{union}(u, v)$
-		\EndIf
-		\EndFor
-		\State \Return $mst$
-		\EndFunction
-	\end{algorithmic}
-\end{algorithm}
+\subsection{Modularity}
 
-\textbf{Complexity:} $O(|E|\log|E|)$ for sorting edges
+Measures how well a partition captures community structure:
+\[
+Q = \frac{1}{2m} \sum_{ij} (A_{ij} - \frac{k_i k_j}{2m})\delta(c_i,c_j).
+\]
 
-\subsection{Prim's Algorithm}
-Prim's algorithm grows MST from an arbitrary starting vertex.
+Algorithms such as Louvain and Leiden optimize modularity.
 
-\begin{algorithm}[H]
-	\caption{Prim's Algorithm}
-	\begin{algorithmic}[1]
-		\Function{Prim}{$G$, $r$}
-		\For{each vertex $v$ in $G$}
-		\State $key[v] \gets \infty$
-		\State $parent[v] \gets \text{null}$
-		\EndFor
-		\State $key[r] \gets 0$
-		\State Initialize priority queue $Q$ with all vertices
-		\While{$Q$ is not empty}
-		\State $u \gets Q$.extract\_min()
-		\For{each neighbor $v$ of $u$}
-		\If{$v \in Q$ and $w(u, v) < key[v]$}
-		\State $parent[v] \gets u$
-		\State $key[v] \gets w(u, v)$
-		\State $Q$.decrease\_key($v$, $key[v]$)
-		\EndIf
-		\EndFor
-		\EndWhile
-		\State \Return $parent$
-		\EndFunction
-	\end{algorithmic}
-\end{algorithm}
-
-\textbf{Complexity:} $O(|E|\log|V|)$ with binary heap
-
-\section{Network Flow Algorithms}
-Network flow algorithms solve problems involving flow of resources through networks.
-
-\subsection{Max-Flow / Min-Cut Theorem}
-The maximum flow through a network equals the capacity of the minimum cut.
-
-\subsection{Ford-Fulkerson Method}
-Ford-Fulkerson finds maximum flow by repeatedly finding augmenting paths.
-
-\begin{algorithm}[H]
-	\caption{Ford-Fulkerson Method}
-	\begin{algorithmic}[1]
-		\Function{FordFulkerson}{$G$, $s$, $t$}
-		\State Initialize flow $f$ to 0 on all edges
-		\While{there exists augmenting path $p$ from $s$ to $t$ in $G_f$}
-		\State $c_f(p) \gets \min\{c_f(u,v) : (u,v) \in p\}$
-		\For{each edge $(u,v)$ in $p$}
-		\If{$(u,v)$ is in original graph}
-		\State $f(u,v) \gets f(u,v) + c_f(p)$
-		\Else
-		\State $f(v,u) \gets f(v,u) - c_f(p)$
-		\EndIf
-		\EndFor
-		\EndWhile
-		\State \Return $f$
-		\EndFunction
-	\end{algorithmic}
-\end{algorithm}
-
-\subsection{Edmonds-Karp Algorithm}
-Edmonds-Karp uses BFS to find shortest augmenting paths.
-
-\begin{algorithm}[H]
-	\caption{Edmonds-Karp Algorithm}
-	\begin{algorithmic}[1]
-		\Function{EdmondsKarp}{$G$, $s$, $t$}
-		\State $flow \gets 0$
-		\State Initialize residual network $G_f$
-		\While{true}
-		\State $p \gets$ BFS($G_f$, $s$, $t$)
-		\If{no such path exists}
-		\State \textbf{break}
-		\EndIf
-		\State $c_f(p) \gets \min\{c_f(u,v) : (u,v) \in p\}$
-		\State Update flow along $p$
-		\State Update $G_f$
-		\State $flow \gets flow + c_f(p)$
-		\EndWhile
-		\State \Return $flow$
-		\EndFunction
-	\end{algorithmic}
-\end{algorithm}
-
-\textbf{Complexity:} $O(|V||E|^2)$
-
-\section{Graph Matching Algorithms}
-Graph matching finds sets of edges without common vertices.
-
-\subsection{Maximum Matching}
-A maximum matching contains the largest possible number of edges.
-
-\subsection{Bipartite Matching}
-Bipartite matching finds maximum matchings in bipartite graphs.
-
-\subsection{Stable Matching (Gale-Shapley Algorithm)}
-Stable matching finds a matching where no unmatched pair would both prefer each other.
-
-\begin{algorithm}[H]
-	\caption{Gale-Shapley Algorithm}
-	\begin{algorithmic}[1]
-		\Function{GaleShapley}{$M$, $W$}
-		\State Initialize all men and women as free
-		\While{there exists free man $m$ with woman $w$ to propose to}
-		\State $w \gets$ first woman on $m$'s list not yet proposed to
-		\If{$w$ is free}
-		\State $m$ and $w$ become engaged
-		\ElsIf{$w$ prefers $m$ to current partner $m'$}
-		\State $m'$ becomes free
-		\State $m$ and $w$ become engaged
-		\EndIf
-		\EndWhile
-		\State \Return matching of engaged pairs
-		\EndFunction
-	\end{algorithmic}[0]
-\end{algorithm}
-
-\textbf{Properties:}
-\begin{itemize}
-	\item Always produces stable matching
-	\item Man-optimal matching
-	\item Time Complexity: $O(n^2)$ where $n$ is number of men/women
-\end{itemize}
-
+% ---------------------------------------------------------
 \section{Summary}
-This chapter presented foundational classical graph algorithms. From basic traversal to sophisticated optimization, these methods provide efficient solutions to practical problems.
 
-\begin{table}[H]
-	\centering
-	\begin{tabular}{lccc}
-		\hline
-		\textbf{Algorithm} & \textbf{Time Complexity} & \textbf{Space} & \textbf{Key Application} \\
-		\hline
-		DFS & $O(|V|+|E|)$ & $O(|V|)$ & Topological sort \\
-		BFS & $O(|V|+|E|)$ & $O(|V|)$ & Shortest path (unweighted) \\
-		Dijkstra & $O((|V|+|E|)\log|V|)$ & $O(|V|)$ & Shortest path \\
-		Bellman-Ford & $O(|V||E|)$ & $O(|V|)$ & Negative weights \\
-		Floyd-Warshall & $O(|V|^3)$ & $O(|V|^2)$ & All-pairs shortest \\
-		Kruskal & $O(|E|\log|E|)$ & $O(|V|)$ & MST \\
-		Prim & $O(|E|\log|V|)$ & $O(|V|)$ & MST \\
-		Ford-Fulkerson & $O(|E| \cdot f^*)$ & $O(|V|+|E|)$ & Max flow \\
-		Edmonds-Karp & $O(|V||E|^2)$ & $O(|V|+|E|)$ & Max flow \\
-		Gale-Shapley & $O(n^2)$ & $O(n^2)$ & Stable matching \\
-		\hline
-	\end{tabular}
-	\caption{Summary of classical graph algorithms. $f^*$ is maximum flow value.}
-	\label{tab:algorithm_complexities}
-\end{table}
+This chapter introduced models and measures that help analyze real network behavior.  
+Network science provides tools essential for identifying influential nodes, community structure, and overall graph organization.

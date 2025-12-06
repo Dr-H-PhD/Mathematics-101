@@ -1,90 +1,55 @@
 \chapter{Introduction}
-\label{chap:introduction}
 
-\section{Motivation}
-In the contemporary landscape of data-driven decision making, traditional tabular data structures often prove inadequate for capturing the complex, interconnected relationships that characterize real-world systems. From the intricate web of social interactions on digital platforms to the sophisticated networks of protein interactions in biological organisms, modern datasets are inherently relational. The proliferation of interconnected data sources—social networks, communication systems, biological pathways, transportation networks, and knowledge graphs—has created an urgent need for mathematical frameworks capable of modeling, analyzing, and extracting insights from such structured data.
+Graph theory is a branch of discrete mathematics concerned with the study of structures composed of \textbf{vertices} (nodes) and \textbf{edges} (connections). Although originating with Euler’s 1736 solution to the Königsberg Bridge Problem \cite{euler1736}, it has evolved into a major mathematical discipline with extensive applications in modern computer science, data science, network analysis and artificial intelligence.
 
-Graph theory, with its elegant mathematical foundation, provides precisely such a framework. Originally developed to solve abstract mathematical problems, graph theory has evolved into an indispensable tool across numerous disciplines. In computer science, it underpins algorithms for network routing and database design; in sociology, it models social structures and influence propagation; in biology, it represents metabolic pathways and genetic interactions. However, it is in the realms of artificial intelligence and data science that graph theory has witnessed its most transformative applications in recent years.
+\section{Why Graph Theory Matters in Data Science}
 
-The emergence of Graph Neural Networks (GNNs) and other graph-based machine learning techniques represents a paradigm shift in how we approach learning from relational data. These advancements have enabled breakthroughs in diverse applications: from predicting molecular properties in drug discovery to detecting anomalous patterns in financial transactions, from recommending products in e-commerce to understanding information diffusion in social media. This convergence of mathematical theory and practical application forms the central theme of this report.
-
-This report aims to bridge the theoretical foundations of graph theory with their practical implementations in data science. By systematically exploring both classical algorithms and modern machine learning approaches, we seek to demonstrate how graph-theoretical concepts not only provide mathematical rigor but also offer powerful tools for solving real-world problems in an increasingly interconnected digital ecosystem.
-
-\section{What Is Graph Theory?}
-Graph theory is a branch of discrete mathematics that studies the properties and applications of graphs—mathematical structures consisting of vertices (also called nodes) connected by edges (also called links or arcs). Formally, a graph $G$ is defined as an ordered pair $G = (V, E)$ where:
+Many datasets today are relational rather than tabular.  
+Examples include:
 \begin{itemize}
-	\item $V$ is a finite set of vertices (nodes)
-	\item $E \subseteq \{ \{u, v\} \mid u, v \in V, u \neq v \}$ is a set of edges connecting pairs of vertices
+	\item Social networks — users connected via friendships.
+	\item Web graphs — websites connected by hyperlinks.
+	\item Transportation systems — cities connected by routes.
+	\item Biological networks — proteins interacting with one another.
 \end{itemize}
 
-This deceptively simple abstraction possesses remarkable expressive power. The history of graph theory traces back to 1736 when Leonhard Euler solved the Königsberg bridge problem, proving that there was no walk through the city that would cross each of its seven bridges exactly once. Euler's solution laid the foundation for what would become a rich mathematical discipline, though the term "graph" wasn't coined until 1878 by James Joseph Sylvester.
-
-\subsection{Historical Development}
-The evolution of graph theory can be traced through several key milestones:
+Traditional statistical methods often fail to capture this relational structure. Graph theory provides:
 \begin{itemize}
-	\item \textbf{1736:} Euler's solution to the Königsberg bridge problem
-	\item \textbf{1847:} Kirchhoff's circuit laws for electrical networks
-	\item \textbf{1852:} Francis Guthrie poses the Four Color Problem
-	\item \textbf{1926:} Dénes Kőnig publishes the first graph theory textbook
-	\item \textbf{1959:} Erdős and Rényi introduce random graph theory
-	\item \textbf{1976:} Appel and Haken prove the Four Color Theorem
-	\item \textbf{1998-1999:} Watts-Strogatz and Barabási-Albert introduce small-world and scale-free network models
+	\item Mathematical tools for modeling connected systems.
+	\item Algorithms for efficient search, traversal and pattern discovery.
+	\item Foundations for emerging fields such as Graph Neural Networks (GNNs) \cite{kipf2017semi}.
 \end{itemize}
 
-\subsection{Fundamental Concepts}
-At its core, graph theory provides a language for describing relationships. The vertices represent entities, while edges represent relationships between those entities. This simple representation enables the modeling of remarkably complex systems:
+\section{Basic Graph Concept Illustration}
+
+Figure~\ref{fig:simple_graph} shows a basic undirected graph.
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[node distance=2cm, every node/.style={circle, draw, fill=blue!20}]
+		\node (A) {A};
+		\node (B) [right of=A] {B};
+		\node (C) [below of=A] {C};
+		\node (D) [below of=B] {D};
+		
+		\draw (A)--(B);
+		\draw (A)--(C);
+		\draw (B)--(C);
+		\draw (B)--(D);
+		\draw (C)--(D);
+	\end{tikzpicture}
+	\caption{A sample undirected graph with four vertices.}
+	\label{fig:simple_graph}
+\end{figure}
+
+\section{Structure of This Report}
+
+This report is divided into five chapters:
+
 \begin{itemize}
-	\item \textbf{Social Networks:} Vertices represent individuals; edges represent friendships, following relationships, or communications
-	\item \textbf{Transportation Systems:} Vertices represent locations (stations, airports); edges represent routes or connections
-	\item \textbf{Biological Networks:} Vertices represent proteins or genes; edges represent interactions or regulatory relationships
-	\item \textbf{Knowledge Graphs:} Vertices represent entities (people, places, concepts); edges represent semantic relationships
-	\item \textbf{Computer Networks:} Vertices represent devices; edges represent physical or logical connections
+	\item \textbf{Chapter 1}: Introduction to graph theory and its relevance.
+	\item \textbf{Chapter 2}: Formal mathematical foundations and graph structures.
+	\item \textbf{Chapter 3}: Classical graph algorithms used in data science.
+	\item \textbf{Chapter 4}: Advanced topics including spectral graph theory and GNNs.
+	\item \textbf{Chapter 5}: Conclusions and implications for data-driven applications.
 \end{itemize}
-
-The power of this abstraction lies in its ability to separate the essential relational structure from domain-specific details, enabling the transfer of insights and algorithms across diverse application domains.
-
-\section{Importance in AI and Data Science}
-Graph theory's significance in artificial intelligence and data science has grown exponentially in recent years, driven by several converging trends: the increasing availability of network-structured data, advances in computational power, and breakthroughs in machine learning methodologies.
-
-\subsection{Natural Representation of Relational Data}
-Many real-world problems involve entities and their relationships, which graphs naturally capture. This representation enables:
-\begin{itemize}
-	\item \textbf{Modeling Complex Systems:} Graphs can represent systems with multiple types of entities and relationships through heterogeneous graphs and multi-relational graphs
-	\item \textbf{Analysis of Network Properties:} Centrality measures, community structure, and connectivity properties provide insights into system behavior
-	\item \textbf{Algorithm Development:} Graph algorithms leverage relational information to solve problems more efficiently than approaches that ignore structure
-\end{itemize}
-
-\subsection{Foundation for Graph-Based Machine Learning}
-Recent advances in machine learning have increasingly incorporated graph structures:
-\begin{itemize}
-	\item \textbf{Graph Neural Networks (GNNs):} Extend neural network architectures to operate directly on graph-structured data, enabling learning from relational information
-	\item \textbf{Graph Embeddings:} Techniques like Node2Vec and DeepWalk learn low-dimensional vector representations of nodes or entire graphs, preserving structural properties
-	\item \textbf{Spectral Methods:} Utilize the spectral properties of graph Laplacians for clustering, classification, and dimensionality reduction
-	\item \textbf{Graph Kernels:} Define similarity measures between graphs for classification and regression tasks
-\end{itemize}
-
-\subsection{Scalability and Efficiency}
-Graph algorithms often provide efficient solutions to complex problems:
-\begin{itemize}
-	\item \textbf{Shortest Path Algorithms:} Dijkstra's and Floyd-Warshall algorithms find optimal routes in polynomial time
-	\item \textbf{Community Detection:} Modularity optimization and spectral clustering identify cohesive subgroups in large networks
-	\item \textbf{Distributed Processing:} Frameworks like Pregel and GraphX enable processing of billion-scale graphs on distributed systems
-\end{itemize}
-
-\subsection{Interpretability and Explainability}
-Unlike some "black-box" machine learning models, graph-based approaches often provide more interpretable results:
-\begin{itemize}
-	\item \textbf{Structural Explanations:} Important nodes, edges, or subgraphs can be identified and visualized
-	\item \textbf{Causal Inference:} Graph structures naturally support causal reasoning and inference
-	\item \textbf{Knowledge Integration:} Domain knowledge can be incorporated through predefined graph structures
-\end{itemize}
-
-\subsection{Emerging Applications}
-The application of graph theory in AI and data science continues to expand into new domains:
-\begin{itemize}
-	\item \textbf{Autonomous Systems:} Road networks for self-driving vehicles, sensor networks for IoT systems
-	\item \textbf{Healthcare:} Disease progression networks, drug interaction graphs, patient similarity networks
-	\item \textbf{Cybersecurity:} Attack graphs, malware propagation networks, anomaly detection in network traffic
-	\item \textbf{Finance:} Transaction networks for fraud detection, correlation networks for portfolio optimization
-\end{itemize}
-

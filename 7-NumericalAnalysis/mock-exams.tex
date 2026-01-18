@@ -1,0 +1,1022 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage[top=2cm,bottom=2cm,left=2.5cm,right=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{hyperref}
+
+\tcbuselibrary{breakable,skins}
+
+% Header/Footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Numerical Analysis}
+\fancyhead[R]{Mock Exam}
+\fancyfoot[C]{Page \thepage\ of \pageref{LastPage}}
+
+% Solution box
+\newtcolorbox{solution}{
+    colback=green!5!white,
+    colframe=green!60!black,
+    fonttitle=\bfseries,
+    title=Solution,
+    breakable,
+    before skip=6pt,
+    after skip=6pt
+}
+
+% Exam header
+\newcommand{\examheader}[1]{
+\begin{center}
+\large\textbf{MOCK EXAM #1}\\[4pt]
+\textbf{Numerical Analysis}\\[4pt]
+\normalsize Duration: 90 minutes \quad|\quad Total: 100 points\\[6pt]
+\hrule
+\vspace{4pt}
+\textit{Show all work. Partial credit may be awarded for correct reasoning.}\\
+\textit{Calculators permitted. Round answers to 4 decimal places unless stated otherwise.}
+\end{center}
+\vspace{8pt}
+}
+
+\title{\textbf{Numerical Analysis: Mock Examinations}\\[0.5cm]
+\large Computational Methods for Mathematical Problems\\
+Mathematics 101}
+\author{SOLTANI Achraf}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+%=============================================================================
+%=============================================================================
+\section*{Mock Exam 1}
+\addcontentsline{toc}{section}{Mock Exam 1}
+%=============================================================================
+%=============================================================================
+
+\examheader{1}
+
+\subsection*{Part A: Errors and Approximations (20 points)}
+
+\textbf{Question 1} (10 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item The exact value of $e$ is $2.71828182...$. If we use $\tilde{e} = 2.718$, find the absolute error and relative error (as a percentage). \hfill (4 pts)
+    \item A computation yields $x = 3.14159$ when the true value is $\pi$. How many significant figures are correct? \hfill (3 pts)
+    \item Explain why computing $\sqrt{x+1} - \sqrt{x}$ for large $x$ may lead to loss of significance. Write an equivalent formula that avoids this problem. \hfill (3 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\textbf{Question 2} (10 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item How many bisection iterations are needed to achieve an error less than $10^{-4}$ starting from the interval $[0, 2]$? \hfill (5 pts)
+    \item If a method has quadratic convergence with $|e_{n+1}| \leq 0.5|e_n|^2$, and the initial error is $|e_0| = 0.1$, estimate $|e_3|$. \hfill (5 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\subsection*{Part B: Root Finding Methods (30 points)}
+
+\textbf{Question 3} (15 points)
+
+Consider $f(x) = x^3 - 2x - 5$.
+
+\begin{enumerate}[label=(\alph*)]
+    \item Show that there is a root in the interval $[2, 3]$. \hfill (3 pts)
+    \item Perform 3 iterations of the bisection method starting from $[2, 3]$. \hfill (6 pts)
+    \item Perform 2 iterations of Newton-Raphson starting from $x_0 = 2$. \hfill (6 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\textbf{Question 4} (15 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item Use the secant method with $x_0 = 1$ and $x_1 = 2$ to find $x_2$ for $f(x) = x^2 - 3$. \hfill (5 pts)
+    \item For solving $x = \cos(x)$ by fixed-point iteration, verify that the iteration converges by checking $|g'(x)|$ at the approximate root $r \approx 0.739$. \hfill (5 pts)
+    \item Apply 3 iterations of fixed-point iteration to $x = \cos(x)$ starting from $x_0 = 0.5$. \hfill (5 pts)
+\end{enumerate}
+
+\newpage
+
+\subsection*{Part C: Interpolation and Numerical Calculus (25 points)}
+
+\textbf{Question 5} (12 points)
+
+Given the data points: $(0, 1)$, $(1, 3)$, $(2, 7)$.
+
+\begin{enumerate}[label=(\alph*)]
+    \item Construct the Lagrange interpolating polynomial $P_2(x)$. \hfill (6 pts)
+    \item Use your polynomial to estimate $f(1.5)$. \hfill (3 pts)
+    \item If the data comes from $f(x) = x^2 + x + 1$, verify your polynomial is correct. \hfill (3 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\textbf{Question 6} (13 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item Use the central difference formula to approximate $f'(1)$ for $f(x) = \ln(x)$ with $h = 0.1$. Compare with the exact value. \hfill (5 pts)
+    \item Apply Simpson's rule with $n = 4$ to approximate $\int_0^2 x^2\, dx$. Compare with the exact value. \hfill (8 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\subsection*{Part D: Linear Systems and ODEs (25 points)}
+
+\textbf{Question 7} (12 points)
+
+Solve the following system using Gaussian elimination:
+\[
+\begin{cases}
+x + 2y + z = 9\\
+2x - y + 3z = 8\\
+3x + y - z = 3
+\end{cases}
+\]
+
+\vspace{2cm}
+
+\textbf{Question 8} (13 points)
+
+Consider the IVP: $y' = y - t$, $y(0) = 2$.
+
+\begin{enumerate}[label=(\alph*)]
+    \item Apply Euler's method with $h = 0.2$ to find $y(0.4)$. \hfill (6 pts)
+    \item Apply one step of RK4 with $h = 0.2$ to find $y(0.2)$. \hfill (7 pts)
+\end{enumerate}
+
+\newpage
+
+%-----------------------------------------------------------------------------
+\subsection*{Mock Exam 1 --- Solutions}
+%-----------------------------------------------------------------------------
+
+\begin{solution}
+\textbf{Question 1}
+
+(a) Absolute error: $|2.71828182 - 2.718| = \boxed{0.00028182}$
+
+Relative error: $\frac{0.00028182}{2.71828182} \approx 0.000104 = \boxed{0.0104\%}$
+
+(b) $\pi = 3.14159265...$, approximation = $3.14159$
+
+Comparing digit by digit: $3.14159$ matches 6 significant figures (the 6th digit rounds correctly).
+
+$\boxed{6 \text{ significant figures}}$
+
+(c) For large $x$, both $\sqrt{x+1}$ and $\sqrt{x}$ are nearly equal, so their difference loses precision (catastrophic cancellation).
+
+Rationalized formula:
+\[\sqrt{x+1} - \sqrt{x} = \frac{(\sqrt{x+1} - \sqrt{x})(\sqrt{x+1} + \sqrt{x})}{\sqrt{x+1} + \sqrt{x}} = \boxed{\frac{1}{\sqrt{x+1} + \sqrt{x}}}\]
+\end{solution}
+
+\begin{solution}
+\textbf{Question 2}
+
+(a) Error after $n$ iterations: $\frac{b-a}{2^{n+1}} < 10^{-4}$
+
+$\frac{2}{2^{n+1}} < 10^{-4} \Rightarrow 2^{n+1} > 2 \times 10^4 \Rightarrow 2^{n+1} > 20000$
+
+$2^{14} = 16384$, $2^{15} = 32768$
+
+So $n + 1 \geq 15$, thus $\boxed{n = 14}$ iterations.
+
+(b) With $|e_{n+1}| \leq 0.5|e_n|^2$:
+\begin{align*}
+|e_1| &\leq 0.5(0.1)^2 = 0.005\\
+|e_2| &\leq 0.5(0.005)^2 = 0.0000125\\
+|e_3| &\leq 0.5(0.0000125)^2 \approx \boxed{7.8 \times 10^{-11}}
+\end{align*}
+\end{solution}
+
+\begin{solution}
+\textbf{Question 3}
+
+(a) $f(2) = 8 - 4 - 5 = -1 < 0$
+
+$f(3) = 27 - 6 - 5 = 16 > 0$
+
+Sign change confirms root in $[2, 3]$. \checkmark
+
+(b) Bisection:
+\begin{center}
+\begin{tabular}{ccccc}
+\toprule
+$n$ & $a$ & $b$ & $c$ & $f(c)$ \\
+\midrule
+1 & 2 & 3 & 2.5 & $5.625$ \\
+2 & 2 & 2.5 & 2.25 & $1.8906$ \\
+3 & 2 & 2.25 & 2.125 & $0.3457$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+After 3 iterations: $\boxed{r \approx 2.125}$
+
+(c) Newton-Raphson: $f'(x) = 3x^2 - 2$, $x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}$
+
+$x_0 = 2$: $f(2) = -1$, $f'(2) = 10$
+
+$x_1 = 2 - \frac{-1}{10} = \boxed{2.1}$
+
+$x_1 = 2.1$: $f(2.1) = 9.261 - 4.2 - 5 = 0.061$, $f'(2.1) = 13.23 - 2 = 11.23$
+
+$x_2 = 2.1 - \frac{0.061}{11.23} = \boxed{2.0946}$
+\end{solution}
+
+\begin{solution}
+\textbf{Question 4}
+
+(a) Secant method: $x_2 = x_1 - f(x_1)\frac{x_1 - x_0}{f(x_1) - f(x_0)}$
+
+$f(1) = 1 - 3 = -2$, $f(2) = 4 - 3 = 1$
+
+$x_2 = 2 - (1)\frac{2-1}{1-(-2)} = 2 - \frac{1}{3} = \boxed{1.6667}$
+
+(b) $g(x) = \cos(x)$, $g'(x) = -\sin(x)$
+
+At $r \approx 0.739$: $|g'(0.739)| = |\sin(0.739)| \approx 0.673 < 1$
+
+Since $|g'(r)| < 1$, the iteration \textbf{converges}. \checkmark
+
+(c) Fixed-point iteration $x_{n+1} = \cos(x_n)$:
+\begin{align*}
+x_0 &= 0.5\\
+x_1 &= \cos(0.5) = 0.8776\\
+x_2 &= \cos(0.8776) = 0.6390\\
+x_3 &= \cos(0.6390) = 0.8027
+\end{align*}
+
+$\boxed{x_3 = 0.8027}$ (converging to $\approx 0.739$)
+\end{solution}
+
+\begin{solution}
+\textbf{Question 5}
+
+(a) Lagrange basis polynomials:
+\begin{align*}
+L_0(x) &= \frac{(x-1)(x-2)}{(0-1)(0-2)} = \frac{(x-1)(x-2)}{2}\\
+L_1(x) &= \frac{(x-0)(x-2)}{(1-0)(1-2)} = -x(x-2) = -x^2 + 2x\\
+L_2(x) &= \frac{(x-0)(x-1)}{(2-0)(2-1)} = \frac{x(x-1)}{2}
+\end{align*}
+
+$P_2(x) = 1 \cdot L_0 + 3 \cdot L_1 + 7 \cdot L_2$
+
+$= \frac{(x-1)(x-2)}{2} + 3(-x^2+2x) + 7\frac{x(x-1)}{2}$
+
+$= \frac{x^2-3x+2}{2} - 3x^2 + 6x + \frac{7x^2-7x}{2}$
+
+$= \frac{x^2-3x+2 + 7x^2-7x}{2} - 3x^2 + 6x = \frac{8x^2-10x+2}{2} - 3x^2 + 6x$
+
+$= 4x^2 - 5x + 1 - 3x^2 + 6x = \boxed{x^2 + x + 1}$
+
+(b) $P_2(1.5) = 2.25 + 1.5 + 1 = \boxed{4.75}$
+
+(c) $f(x) = x^2 + x + 1$: $f(0) = 1$, $f(1) = 3$, $f(2) = 7$ \checkmark
+
+The polynomial matches exactly.
+\end{solution}
+
+\begin{solution}
+\textbf{Question 6}
+
+(a) Central difference: $f'(x) \approx \frac{f(x+h) - f(x-h)}{2h}$
+
+$f'(1) \approx \frac{\ln(1.1) - \ln(0.9)}{0.2} = \frac{0.0953 - (-0.1054)}{0.2} = \frac{0.2007}{0.2} = \boxed{1.0034}$
+
+Exact: $f'(x) = \frac{1}{x}$, so $f'(1) = 1$
+
+Error: $|1.0034 - 1| = 0.0034$
+
+(b) Simpson's rule with $n = 4$, $h = 0.5$:
+
+$x_i$: 0, 0.5, 1, 1.5, 2
+
+$f(x_i) = x_i^2$: 0, 0.25, 1, 2.25, 4
+
+$I \approx \frac{h}{3}[f_0 + 4(f_1 + f_3) + 2f_2 + f_4]$
+
+$= \frac{0.5}{3}[0 + 4(0.25 + 2.25) + 2(1) + 4]$
+
+$= \frac{0.5}{3}[0 + 10 + 2 + 4] = \frac{0.5 \times 16}{3} = \boxed{\frac{8}{3} = 2.6667}$
+
+Exact: $\int_0^2 x^2\, dx = \frac{x^3}{3}\Big|_0^2 = \frac{8}{3}$
+
+Simpson's rule gives the exact answer for polynomials of degree $\leq 3$.
+\end{solution}
+
+\begin{solution}
+\textbf{Question 7}
+
+Augmented matrix:
+$\left[\begin{array}{ccc|c} 1 & 2 & 1 & 9\\ 2 & -1 & 3 & 8\\ 3 & 1 & -1 & 3 \end{array}\right]$
+
+$R_2 \leftarrow R_2 - 2R_1$, $R_3 \leftarrow R_3 - 3R_1$:
+
+$\left[\begin{array}{ccc|c} 1 & 2 & 1 & 9\\ 0 & -5 & 1 & -10\\ 0 & -5 & -4 & -24 \end{array}\right]$
+
+$R_3 \leftarrow R_3 - R_2$:
+
+$\left[\begin{array}{ccc|c} 1 & 2 & 1 & 9\\ 0 & -5 & 1 & -10\\ 0 & 0 & -5 & -14 \end{array}\right]$
+
+Back substitution:
+$-5z = -14 \Rightarrow z = \frac{14}{5} = 2.8$
+
+$-5y + 2.8 = -10 \Rightarrow y = 2.56$
+
+$x + 2(2.56) + 2.8 = 9 \Rightarrow x = 1.08$
+
+$\boxed{x = 1.08, \quad y = 2.56, \quad z = 2.8}$
+\end{solution}
+
+\begin{solution}
+\textbf{Question 8}
+
+(a) Euler's method: $y_{n+1} = y_n + h \cdot f(t_n, y_n) = y_n + 0.2(y_n - t_n)$
+
+$y_0 = 2$, $t_0 = 0$:
+$y_1 = 2 + 0.2(2 - 0) = 2 + 0.4 = 2.4$
+
+$y_1 = 2.4$, $t_1 = 0.2$:
+$y_2 = 2.4 + 0.2(2.4 - 0.2) = 2.4 + 0.44 = 2.84$
+
+$\boxed{y(0.4) \approx 2.84}$
+
+(b) RK4 with $h = 0.2$, $f(t,y) = y - t$, $t_0 = 0$, $y_0 = 2$:
+
+$k_1 = 0.2 f(0, 2) = 0.2(2) = 0.4$
+
+$k_2 = 0.2 f(0.1, 2.2) = 0.2(2.2 - 0.1) = 0.2(2.1) = 0.42$
+
+$k_3 = 0.2 f(0.1, 2.21) = 0.2(2.21 - 0.1) = 0.2(2.11) = 0.422$
+
+$k_4 = 0.2 f(0.2, 2.422) = 0.2(2.422 - 0.2) = 0.2(2.222) = 0.4444$
+
+$y_1 = 2 + \frac{1}{6}(0.4 + 2(0.42) + 2(0.422) + 0.4444)$
+
+$= 2 + \frac{1}{6}(0.4 + 0.84 + 0.844 + 0.4444) = 2 + \frac{2.5284}{6}$
+
+$\boxed{y(0.2) \approx 2.4214}$
+\end{solution}
+
+\newpage
+
+%=============================================================================
+%=============================================================================
+\section*{Mock Exam 2}
+\addcontentsline{toc}{section}{Mock Exam 2}
+%=============================================================================
+%=============================================================================
+
+\examheader{2}
+
+\subsection*{Part A: Errors and Root Finding (25 points)}
+
+\textbf{Question 1} (10 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item Given that $\sin(0.1) = 0.0998334...$, if we approximate it as $0.1$ (first term of Taylor series), find the absolute and relative errors. \hfill (4 pts)
+    \item The quadratic formula involves computing $\sqrt{b^2 - 4ac}$. Explain when catastrophic cancellation might occur in calculating $\frac{-b + \sqrt{b^2-4ac}}{2a}$. \hfill (3 pts)
+    \item What is the order of convergence for the bisection method? For Newton-Raphson? \hfill (3 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\textbf{Question 2} (15 points)
+
+Let $f(x) = e^x - 3x$.
+
+\begin{enumerate}[label=(\alph*)]
+    \item Show there is a root in $[0, 1]$. \hfill (3 pts)
+    \item Apply 3 iterations of bisection starting from $[0, 1]$. \hfill (6 pts)
+    \item Set up the Newton-Raphson iteration formula for this function. \hfill (3 pts)
+    \item Starting from $x_0 = 0.5$, perform 2 Newton-Raphson iterations. \hfill (3 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\subsection*{Part B: Interpolation (25 points)}
+
+\textbf{Question 3} (12 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item Construct the divided difference table for the data:
+    \begin{center}
+    \begin{tabular}{c|ccc}
+    $x$ & 1 & 2 & 4 \\
+    \hline
+    $f(x)$ & 1 & 3 & 9
+    \end{tabular}
+    \end{center} \hfill (6 pts)
+    \item Write the Newton interpolating polynomial. \hfill (4 pts)
+    \item Estimate $f(3)$. \hfill (2 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\textbf{Question 4} (13 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item State the formula for the interpolation error when using $n+1$ points. \hfill (3 pts)
+    \item What is Runge's phenomenon? How can it be mitigated? \hfill (4 pts)
+    \item Find the Lagrange interpolating polynomial through $(-1, 4)$, $(0, 1)$, $(1, 0)$. \hfill (6 pts)
+\end{enumerate}
+
+\newpage
+
+\subsection*{Part C: Numerical Differentiation and Integration (25 points)}
+
+\textbf{Question 5} (12 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item Write the forward, backward, and central difference formulas for $f'(x)$. Which is most accurate? \hfill (4 pts)
+    \item Use the second derivative central difference formula to approximate $f''(2)$ for $f(x) = x^3$ with $h = 0.1$. \hfill (4 pts)
+    \item Explain the trade-off between truncation error and round-off error when choosing $h$ for numerical differentiation. \hfill (4 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\textbf{Question 6} (13 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item Use the trapezoidal rule with $n = 4$ to approximate $\int_1^3 \frac{1}{x}\, dx$. \hfill (6 pts)
+    \item What is the exact value of this integral? Calculate the error. \hfill (3 pts)
+    \item What is the error order of the trapezoidal rule? Of Simpson's rule? \hfill (4 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\subsection*{Part D: Linear Systems and ODEs (25 points)}
+
+\textbf{Question 7} (12 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item Apply 2 iterations of the Jacobi method to:
+    \[
+    \begin{cases}
+    5x + y = 11\\
+    x + 4y = 18
+    \end{cases}
+    \]
+    starting from $(x_0, y_0) = (0, 0)$. \hfill (6 pts)
+    \item Is this system diagonally dominant? Will the iteration converge? \hfill (3 pts)
+    \item What is the difference between Jacobi and Gauss-Seidel methods? \hfill (3 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\textbf{Question 8} (13 points)
+
+Consider $y' = -2y$, $y(0) = 1$.
+
+\begin{enumerate}[label=(\alph*)]
+    \item What is the exact solution? \hfill (3 pts)
+    \item Use Euler's method with $h = 0.25$ to approximate $y(0.5)$. \hfill (5 pts)
+    \item Compare your Euler approximation with the exact value. \hfill (2 pts)
+    \item Why is RK4 generally preferred over Euler's method? \hfill (3 pts)
+\end{enumerate}
+
+\newpage
+
+%-----------------------------------------------------------------------------
+\subsection*{Mock Exam 2 --- Solutions}
+%-----------------------------------------------------------------------------
+
+\begin{solution}
+\textbf{Question 1}
+
+(a) Absolute error: $|0.0998334 - 0.1| = \boxed{0.0001666}$
+
+Relative error: $\frac{0.0001666}{0.0998334} \approx 0.00167 = \boxed{0.167\%}$
+
+(b) Catastrophic cancellation occurs when $b > 0$ and $b^2 \gg 4ac$ (discriminant close to $b^2$). Then $\sqrt{b^2-4ac} \approx |b|$, and $-b + \sqrt{b^2-4ac}$ involves subtracting nearly equal numbers.
+
+(c) Bisection: \textbf{Linear} (order 1), gains $\sim 1$ bit per iteration.
+
+Newton-Raphson: \textbf{Quadratic} (order 2), digits double each iteration.
+\end{solution}
+
+\begin{solution}
+\textbf{Question 2}
+
+(a) $f(0) = 1 - 0 = 1 > 0$
+
+$f(1) = e - 3 \approx 2.718 - 3 = -0.282 < 0$
+
+Sign change $\Rightarrow$ root exists in $[0, 1]$. \checkmark
+
+(b) Bisection:
+\begin{center}
+\begin{tabular}{ccccc}
+\toprule
+$n$ & $a$ & $b$ & $c$ & $f(c)$ \\
+\midrule
+1 & 0 & 1 & 0.5 & $0.149$ \\
+2 & 0.5 & 1 & 0.75 & $-0.133$ \\
+3 & 0.5 & 0.75 & 0.625 & $-0.006$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Root $\approx \boxed{0.625}$
+
+(c) $f'(x) = e^x - 3$
+
+$\boxed{x_{n+1} = x_n - \frac{e^{x_n} - 3x_n}{e^{x_n} - 3}}$
+
+(d) $x_0 = 0.5$: $f(0.5) = 1.649 - 1.5 = 0.149$, $f'(0.5) = 1.649 - 3 = -1.351$
+
+$x_1 = 0.5 - \frac{0.149}{-1.351} = 0.5 + 0.110 = 0.610$
+
+$x_1 = 0.610$: $f(0.610) = 1.840 - 1.830 = 0.010$, $f'(0.610) = -1.160$
+
+$x_2 = 0.610 - \frac{0.010}{-1.160} = \boxed{0.619}$
+\end{solution}
+
+\begin{solution}
+\textbf{Question 3}
+
+(a) Divided difference table:
+\begin{center}
+\begin{tabular}{c|c|c|c}
+$x$ & $f[x]$ & $f[\cdot,\cdot]$ & $f[\cdot,\cdot,\cdot]$ \\
+\hline
+1 & 1 & & \\
+  &   & $\frac{3-1}{2-1} = 2$ & \\
+2 & 3 &  & $\frac{2-2}{4-1} = 0$ \\
+  &   & $\frac{9-3}{4-2} = 3$ & \\
+4 & 9 & & \\
+\end{tabular}
+\end{center}
+
+Wait, let me recalculate: $f[x_1,x_2] = \frac{9-3}{4-2} = 3$, $f[x_0,x_1,x_2] = \frac{3-2}{4-1} = \frac{1}{3}$
+
+(b) $P_2(x) = f[x_0] + f[x_0,x_1](x-1) + f[x_0,x_1,x_2](x-1)(x-2)$
+
+$\boxed{P_2(x) = 1 + 2(x-1) + \frac{1}{3}(x-1)(x-2)}$
+
+(c) $P_2(3) = 1 + 2(2) + \frac{1}{3}(2)(1) = 1 + 4 + \frac{2}{3} = \boxed{5.667}$
+\end{solution}
+
+\begin{solution}
+\textbf{Question 4}
+
+(a) $\boxed{f(x) - P_n(x) = \frac{f^{(n+1)}(\xi)}{(n+1)!}\prod_{i=0}^{n}(x-x_i)}$
+
+for some $\xi$ in the interval containing $x$ and all $x_i$.
+
+(b) \textbf{Runge's phenomenon}: High-degree polynomial interpolation with equally spaced points can cause large oscillations near the endpoints.
+
+\textbf{Mitigation}: Use Chebyshev nodes (clustered near endpoints), use lower-degree piecewise polynomials (splines), or use fewer points.
+
+(c) Lagrange polynomial through $(-1, 4)$, $(0, 1)$, $(1, 0)$:
+
+$L_0(x) = \frac{(x-0)(x-1)}{(-1-0)(-1-1)} = \frac{x(x-1)}{2}$
+
+$L_1(x) = \frac{(x+1)(x-1)}{(0+1)(0-1)} = -(x^2-1) = 1-x^2$
+
+$L_2(x) = \frac{(x+1)(x-0)}{(1+1)(1-0)} = \frac{x(x+1)}{2}$
+
+$P_2(x) = 4 \cdot \frac{x(x-1)}{2} + 1 \cdot (1-x^2) + 0 \cdot \frac{x(x+1)}{2}$
+
+$= 2x^2 - 2x + 1 - x^2 = \boxed{x^2 - 2x + 1} = (x-1)^2$
+\end{solution}
+
+\begin{solution}
+\textbf{Question 5}
+
+(a) Forward: $f'(x) \approx \frac{f(x+h)-f(x)}{h}$, error $O(h)$
+
+Backward: $f'(x) \approx \frac{f(x)-f(x-h)}{h}$, error $O(h)$
+
+Central: $f'(x) \approx \frac{f(x+h)-f(x-h)}{2h}$, error $O(h^2)$ $\leftarrow$ \textbf{most accurate}
+
+(b) $f''(x) \approx \frac{f(x+h) - 2f(x) + f(x-h)}{h^2}$
+
+$f(1.9) = 6.859$, $f(2) = 8$, $f(2.1) = 9.261$
+
+$f''(2) \approx \frac{9.261 - 16 + 6.859}{0.01} = \frac{0.12}{0.01} = \boxed{12}$
+
+Exact: $f''(x) = 6x$, so $f''(2) = 12$ \checkmark
+
+(c) \textbf{Truncation error} decreases as $h \to 0$ (from Taylor series approximation).
+
+\textbf{Round-off error} increases as $h \to 0$ (subtracting nearly equal numbers).
+
+There is an optimal $h$ that balances these two sources of error.
+\end{solution}
+
+\begin{solution}
+\textbf{Question 6}
+
+(a) Trapezoidal rule: $h = \frac{3-1}{4} = 0.5$
+
+$x$: 1, 1.5, 2, 2.5, 3
+
+$f(x) = 1/x$: 1, 0.6667, 0.5, 0.4, 0.3333
+
+$I \approx \frac{0.5}{2}[1 + 2(0.6667 + 0.5 + 0.4) + 0.3333]$
+
+$= 0.25[1 + 3.1334 + 0.3333] = 0.25 \times 4.4667 = \boxed{1.1167}$
+
+(b) Exact: $\int_1^3 \frac{1}{x}\, dx = \ln(3) - \ln(1) = \ln(3) \approx 1.0986$
+
+Error: $|1.1167 - 1.0986| = \boxed{0.0181}$
+
+(c) Trapezoidal rule: $\boxed{O(h^2)}$
+
+Simpson's rule: $\boxed{O(h^4)}$
+\end{solution}
+
+\begin{solution}
+\textbf{Question 7}
+
+(a) Rearranged: $x = \frac{11-y}{5}$, $y = \frac{18-x}{4}$
+
+Jacobi iteration:
+\begin{align*}
+k=1: \quad x^{(1)} &= \frac{11-0}{5} = 2.2, \quad y^{(1)} = \frac{18-0}{4} = 4.5\\
+k=2: \quad x^{(2)} &= \frac{11-4.5}{5} = 1.3, \quad y^{(2)} = \frac{18-2.2}{4} = 3.95
+\end{align*}
+
+After 2 iterations: $\boxed{x \approx 1.3, \quad y \approx 3.95}$
+
+(b) Diagonal dominance: $|5| > |1|$ and $|4| > |1|$ \checkmark
+
+Yes, \textbf{diagonally dominant}, so iteration will \textbf{converge}.
+
+(c) \textbf{Jacobi}: Uses values from previous iteration only.
+
+\textbf{Gauss-Seidel}: Uses updated values immediately (faster convergence).
+\end{solution}
+
+\begin{solution}
+\textbf{Question 8}
+
+(a) $\frac{dy}{y} = -2\, dt \Rightarrow \ln|y| = -2t + C$
+
+$y(0) = 1 \Rightarrow C = 0$
+
+$\boxed{y = e^{-2t}}$
+
+(b) Euler: $y_{n+1} = y_n + h(-2y_n) = y_n(1 - 2h) = 0.5 y_n$
+
+$y_0 = 1$
+
+$y_1 = 0.5(1) = 0.5$
+
+$y_2 = 0.5(0.5) = 0.25$
+
+$\boxed{y(0.5) \approx 0.25}$
+
+(c) Exact: $y(0.5) = e^{-1} \approx 0.3679$
+
+Euler gives $0.25$, error $\approx 0.118$ (32\% relative error)
+
+(d) RK4 is preferred because:
+\begin{itemize}
+    \item Fourth-order accuracy ($O(h^4)$) vs first-order ($O(h)$)
+    \item Much more accurate for same step size
+    \item Better stability properties
+    \item Cost of 4 function evaluations is usually worthwhile
+\end{itemize}
+\end{solution}
+
+\newpage
+
+%=============================================================================
+%=============================================================================
+\section*{Mock Exam 3}
+\addcontentsline{toc}{section}{Mock Exam 3}
+%=============================================================================
+%=============================================================================
+
+\examheader{3}
+
+\subsection*{Part A: Comprehensive Root Finding (25 points)}
+
+\textbf{Question 1} (12 points)
+
+The equation $x = 2\sin(x)$ has a nonzero root near $x = 1.9$.
+
+\begin{enumerate}[label=(\alph*)]
+    \item Rewrite as $f(x) = 0$ and verify there is a root in $[1.5, 2]$. \hfill (3 pts)
+    \item Perform 2 iterations of Newton-Raphson starting from $x_0 = 1.9$. \hfill (6 pts)
+    \item Rewrite as $x = g(x)$ for fixed-point iteration. Will $g(x) = 2\sin(x)$ converge? \hfill (3 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\textbf{Question 2} (13 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item Compare bisection, Newton-Raphson, and secant methods in terms of:
+    \begin{itemize}
+        \item Convergence rate
+        \item Required information (function values, derivatives)
+        \item Reliability
+    \end{itemize} \hfill (6 pts)
+    \item When would you choose bisection over Newton-Raphson? \hfill (3 pts)
+    \item What happens to Newton-Raphson near a root of multiplicity 2? \hfill (4 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\subsection*{Part B: Interpolation and Approximation (25 points)}
+
+\textbf{Question 3} (13 points)
+
+The following data represents temperature readings:
+\begin{center}
+\begin{tabular}{c|cccc}
+Time (hr) & 0 & 2 & 4 & 6 \\
+\hline
+Temp (°C) & 20 & 26 & 30 & 28
+\end{tabular}
+\end{center}
+
+\begin{enumerate}[label=(\alph*)]
+    \item Use Lagrange interpolation to estimate the temperature at $t = 3$. \hfill (8 pts)
+    \item Would you trust this interpolation for $t = 10$? Explain. \hfill (2 pts)
+    \item What degree is the interpolating polynomial? \hfill (3 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\textbf{Question 4} (12 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item Construct the Newton divided difference polynomial for $(0, 1)$, $(1, 0)$, $(2, 1)$. \hfill (6 pts)
+    \item Add the point $(3, 4)$ to your polynomial. What is the advantage of Newton's form for this? \hfill (6 pts)
+\end{enumerate}
+
+\newpage
+
+\subsection*{Part C: Numerical Integration (25 points)}
+
+\textbf{Question 5} (13 points)
+
+Approximate $\int_0^{\pi} \sin(x)\, dx$ using:
+
+\begin{enumerate}[label=(\alph*)]
+    \item The trapezoidal rule with $n = 2$. \hfill (4 pts)
+    \item Simpson's rule with $n = 2$. \hfill (4 pts)
+    \item Compare both with the exact value and discuss which is more accurate. \hfill (5 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\textbf{Question 6} (12 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item Derive the trapezoidal rule by integrating the linear interpolant through $(a, f(a))$ and $(b, f(b))$. \hfill (6 pts)
+    \item Simpson's rule is exact for polynomials up to what degree? \hfill (2 pts)
+    \item How does the composite trapezoidal rule differ from the simple trapezoidal rule? \hfill (4 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\subsection*{Part D: Systems and ODEs (25 points)}
+
+\textbf{Question 7} (12 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item Factor $A = LU$ for $A = \begin{pmatrix} 2 & 1 \\ 4 & 5 \end{pmatrix}$. \hfill (6 pts)
+    \item Use your LU factorization to solve $A\mathbf{x} = \begin{pmatrix} 5 \\ 13 \end{pmatrix}$. \hfill (6 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\textbf{Question 8} (13 points)
+
+For the IVP $y' = t + y$, $y(0) = 1$:
+
+\begin{enumerate}[label=(\alph*)]
+    \item Compute one step of RK2 (midpoint method) with $h = 0.2$. \hfill (6 pts)
+    \item Compute one step of RK4 with $h = 0.2$. \hfill (7 pts)
+\end{enumerate}
+
+\newpage
+
+%-----------------------------------------------------------------------------
+\subsection*{Mock Exam 3 --- Solutions}
+%-----------------------------------------------------------------------------
+
+\begin{solution}
+\textbf{Question 1}
+
+(a) $f(x) = x - 2\sin(x) = 0$
+
+$f(1.5) = 1.5 - 2\sin(1.5) = 1.5 - 1.995 = -0.495 < 0$
+
+$f(2) = 2 - 2\sin(2) = 2 - 1.819 = 0.181 > 0$
+
+Sign change $\Rightarrow$ root in $[1.5, 2]$. \checkmark
+
+(b) $f'(x) = 1 - 2\cos(x)$
+
+$x_0 = 1.9$: $f(1.9) = 1.9 - 2\sin(1.9) = 1.9 - 1.892 = 0.008$
+
+$f'(1.9) = 1 - 2\cos(1.9) = 1 - 2(-0.323) = 1.646$
+
+$x_1 = 1.9 - \frac{0.008}{1.646} = 1.895$
+
+$x_1 = 1.895$: $f(1.895) \approx 0.0004$, $f'(1.895) \approx 1.64$
+
+$x_2 = 1.895 - \frac{0.0004}{1.64} = \boxed{1.8955}$
+
+(c) $g(x) = 2\sin(x)$, $g'(x) = 2\cos(x)$
+
+At $r \approx 1.9$: $|g'(1.9)| = |2\cos(1.9)| = 2(0.323) = 0.646 < 1$
+
+Yes, it will \textbf{converge} since $|g'(r)| < 1$.
+\end{solution}
+
+\begin{solution}
+\textbf{Question 2}
+
+(a) Comparison:
+\begin{center}
+\begin{tabular}{l|ccc}
+& Bisection & Newton & Secant \\
+\hline
+Convergence & Linear & Quadratic & $\approx 1.618$ \\
+Requirements & $f$ only & $f$ and $f'$ & $f$ only \\
+Reliability & Always* & May diverge & May diverge \\
+\end{tabular}
+\end{center}
+*if sign change exists
+
+(b) Choose bisection when:
+\begin{itemize}
+    \item Derivative is expensive or unavailable
+    \item Newton-Raphson diverges (bad initial guess)
+    \item Robustness is more important than speed
+    \item Need guaranteed convergence
+\end{itemize}
+
+(c) At a root of multiplicity 2, Newton-Raphson convergence degrades from quadratic to \textbf{linear}. The formula can be modified to $x_{n+1} = x_n - 2\frac{f(x_n)}{f'(x_n)}$ to restore quadratic convergence.
+\end{solution}
+
+\begin{solution}
+\textbf{Question 3}
+
+(a) Points: $(0, 20)$, $(2, 26)$, $(4, 30)$, $(6, 28)$
+
+At $t = 3$:
+
+$L_0(3) = \frac{(3-2)(3-4)(3-6)}{(0-2)(0-4)(0-6)} = \frac{(1)(-1)(-3)}{(-2)(-4)(-6)} = \frac{3}{-48} = -0.0625$
+
+$L_1(3) = \frac{(3-0)(3-4)(3-6)}{(2-0)(2-4)(2-6)} = \frac{(3)(-1)(-3)}{(2)(-2)(-4)} = \frac{9}{16} = 0.5625$
+
+$L_2(3) = \frac{(3-0)(3-2)(3-6)}{(4-0)(4-2)(4-6)} = \frac{(3)(1)(-3)}{(4)(2)(-2)} = \frac{-9}{-16} = 0.5625$
+
+$L_3(3) = \frac{(3-0)(3-2)(3-4)}{(6-0)(6-2)(6-4)} = \frac{(3)(1)(-1)}{(6)(4)(2)} = \frac{-3}{48} = -0.0625$
+
+$T(3) = 20(-0.0625) + 26(0.5625) + 30(0.5625) + 28(-0.0625)$
+
+$= -1.25 + 14.625 + 16.875 - 1.75 = \boxed{28.5°C}$
+
+(b) \textbf{No}. Extrapolation beyond the data range $(t = 10 > 6)$ is unreliable. Polynomial interpolation can give erratic results outside the data interval.
+
+(c) With 4 points, the polynomial has degree at most $\boxed{3}$ (cubic).
+\end{solution}
+
+\begin{solution}
+\textbf{Question 4}
+
+(a) Divided differences for $(0,1)$, $(1,0)$, $(2,1)$:
+
+$f[x_0] = 1$
+
+$f[x_0,x_1] = \frac{0-1}{1-0} = -1$
+
+$f[x_1,x_2] = \frac{1-0}{2-1} = 1$
+
+$f[x_0,x_1,x_2] = \frac{1-(-1)}{2-0} = 1$
+
+$P_2(x) = 1 + (-1)(x-0) + 1(x-0)(x-1) = 1 - x + x^2 - x = \boxed{x^2 - 2x + 1}$
+
+(b) Adding $(3, 4)$:
+
+$f[x_2,x_3] = \frac{4-1}{3-2} = 3$
+
+$f[x_1,x_2,x_3] = \frac{3-1}{3-1} = 1$
+
+$f[x_0,x_1,x_2,x_3] = \frac{1-1}{3-0} = 0$
+
+$P_3(x) = P_2(x) + 0 \cdot (x)(x-1)(x-2) = \boxed{x^2 - 2x + 1}$
+
+\textbf{Advantage}: Newton's form allows adding new points without recalculating the entire polynomial---just compute new divided differences and add a term.
+\end{solution}
+
+\begin{solution}
+\textbf{Question 5}
+
+(a) Trapezoidal with $n = 2$: $h = \frac{\pi}{2}$
+
+$I \approx \frac{h}{2}[f(0) + 2f(\pi/2) + f(\pi)] = \frac{\pi/2}{2}[0 + 2(1) + 0] = \frac{\pi}{2} \approx \boxed{1.5708}$
+
+(b) Simpson's with $n = 2$: $h = \frac{\pi}{2}$
+
+$I \approx \frac{h}{3}[f(0) + 4f(\pi/2) + f(\pi)] = \frac{\pi/2}{3}[0 + 4(1) + 0] = \frac{2\pi}{3} \approx \boxed{2.0944}$
+
+(c) Exact: $\int_0^\pi \sin(x)\, dx = [-\cos(x)]_0^\pi = -(-1) - (-1) = 2$
+
+Trapezoidal error: $|1.5708 - 2| = 0.429$ (21\% error)
+
+Simpson's error: $|2.0944 - 2| = 0.094$ (4.7\% error)
+
+\textbf{Simpson's is more accurate} due to higher order ($O(h^4)$ vs $O(h^2)$).
+\end{solution}
+
+\begin{solution}
+\textbf{Question 6}
+
+(a) Linear interpolant through $(a, f(a))$ and $(b, f(b))$:
+
+$P_1(x) = f(a) + \frac{f(b)-f(a)}{b-a}(x-a)$
+
+$\int_a^b P_1(x)\, dx = \int_a^b \left[f(a) + \frac{f(b)-f(a)}{b-a}(x-a)\right] dx$
+
+$= f(a)(b-a) + \frac{f(b)-f(a)}{b-a} \cdot \frac{(b-a)^2}{2}$
+
+$= f(a)(b-a) + \frac{f(b)-f(a)}{2}(b-a)$
+
+$= \frac{b-a}{2}[2f(a) + f(b) - f(a)] = \boxed{\frac{b-a}{2}[f(a) + f(b)]}$
+
+(b) Simpson's rule is exact for polynomials up to degree $\boxed{3}$.
+
+(c) \textbf{Simple}: One trapezoid over $[a,b]$.
+
+\textbf{Composite}: Divide $[a,b]$ into $n$ subintervals, apply trapezoidal to each, sum results. More accurate for same interval.
+\end{solution}
+
+\begin{solution}
+\textbf{Question 7}
+
+(a) $A = \begin{pmatrix} 2 & 1 \\ 4 & 5 \end{pmatrix}$
+
+$m_{21} = \frac{4}{2} = 2$
+
+$U = \begin{pmatrix} 2 & 1 \\ 0 & 5-2(1) \end{pmatrix} = \begin{pmatrix} 2 & 1 \\ 0 & 3 \end{pmatrix}$
+
+$L = \begin{pmatrix} 1 & 0 \\ 2 & 1 \end{pmatrix}$
+
+$\boxed{L = \begin{pmatrix} 1 & 0 \\ 2 & 1 \end{pmatrix}, \quad U = \begin{pmatrix} 2 & 1 \\ 0 & 3 \end{pmatrix}}$
+
+(b) Solve $L\mathbf{y} = \mathbf{b}$: $\begin{pmatrix} 1 & 0 \\ 2 & 1 \end{pmatrix}\begin{pmatrix} y_1 \\ y_2 \end{pmatrix} = \begin{pmatrix} 5 \\ 13 \end{pmatrix}$
+
+$y_1 = 5$, $2(5) + y_2 = 13 \Rightarrow y_2 = 3$
+
+Solve $U\mathbf{x} = \mathbf{y}$: $\begin{pmatrix} 2 & 1 \\ 0 & 3 \end{pmatrix}\begin{pmatrix} x_1 \\ x_2 \end{pmatrix} = \begin{pmatrix} 5 \\ 3 \end{pmatrix}$
+
+$3x_2 = 3 \Rightarrow x_2 = 1$
+
+$2x_1 + 1 = 5 \Rightarrow x_1 = 2$
+
+$\boxed{x_1 = 2, \quad x_2 = 1}$
+\end{solution}
+
+\begin{solution}
+\textbf{Question 8}
+
+$f(t,y) = t + y$, $t_0 = 0$, $y_0 = 1$, $h = 0.2$
+
+(a) RK2 (Midpoint):
+
+$k_1 = hf(0, 1) = 0.2(0 + 1) = 0.2$
+
+$k_2 = hf(0.1, 1.1) = 0.2(0.1 + 1.1) = 0.2(1.2) = 0.24$
+
+$y_1 = 1 + k_2 = \boxed{1.24}$
+
+(b) RK4:
+
+$k_1 = 0.2 f(0, 1) = 0.2(1) = 0.2$
+
+$k_2 = 0.2 f(0.1, 1.1) = 0.2(1.2) = 0.24$
+
+$k_3 = 0.2 f(0.1, 1.12) = 0.2(1.22) = 0.244$
+
+$k_4 = 0.2 f(0.2, 1.244) = 0.2(1.444) = 0.2888$
+
+$y_1 = 1 + \frac{1}{6}(0.2 + 2(0.24) + 2(0.244) + 0.2888)$
+
+$= 1 + \frac{1}{6}(1.4568) = 1 + 0.2428 = \boxed{1.2428}$
+\end{solution}
+
+\end{document}

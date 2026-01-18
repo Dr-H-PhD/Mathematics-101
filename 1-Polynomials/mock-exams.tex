@@ -1,0 +1,720 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage[top=2cm,bottom=2cm,left=2.5cm,right=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{hyperref}
+
+\tcbuselibrary{breakable,skins}
+
+% Header/Footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{MathTrackX: Polynomials, Functions and Graphs}
+\fancyhead[R]{Mock Exam}
+\fancyfoot[C]{Page \thepage\ of \pageref{LastPage}}
+
+% Solution box
+\newtcolorbox{solution}{
+    colback=green!5!white,
+    colframe=green!60!black,
+    fonttitle=\bfseries,
+    title=Solution,
+    breakable,
+    before skip=6pt,
+    after skip=6pt
+}
+
+% Exam header
+\newcommand{\examheader}[1]{
+\begin{center}
+\large\textbf{MOCK EXAM #1}\\[4pt]
+\textbf{MathTrackX: Polynomials, Functions and Graphs}\\[4pt]
+\normalsize Duration: 60 minutes \quad|\quad Total: 100 points\\[6pt]
+\hrule
+\vspace{4pt}
+\textit{Show all work. Partial credit may be awarded for correct reasoning.}\\
+\textit{Covers: Numbers, Linear Functions, Polynomials, Functions \& Graphs}
+\end{center}
+\vspace{8pt}
+}
+
+\title{\textbf{MathTrackX: Mock Examinations}\\[0.5cm]
+\large Polynomials, Functions and Graphs\\
+Based on University of Adelaide Curriculum}
+\author{SOLTANI Achraf}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+%=============================================================================
+%=============================================================================
+\section*{Mock Exam 1}
+\addcontentsline{toc}{section}{Mock Exam 1}
+%=============================================================================
+%=============================================================================
+
+\examheader{1}
+
+\subsection*{Part A: Numbers and Arithmetic (25 points)}
+
+\textbf{Question 1} (10 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item Classify each number as natural, integer, rational, or irrational (most specific): $\sqrt{25}$, $-\frac{3}{7}$, $\pi$, $0.\overline{6}$ \hfill (4 pts)
+    \item Simplify: $\frac{2}{3} + \frac{5}{4} - \frac{1}{6}$ \hfill (3 pts)
+    \item Evaluate: $4 + 2 \times 3^2 - (8 - 3)$ \hfill (3 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\textbf{Question 2} (15 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item Solve and express in interval notation: $-3x + 5 \leq 14$ \hfill (5 pts)
+    \item Solve: $2(x - 3) > 4x + 2$ \hfill (5 pts)
+    \item Evaluate: $|{-4}| + |3 - 8| - |2|$ \hfill (5 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\subsection*{Part B: Linear Functions (25 points)}
+
+\textbf{Question 3} (10 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item Find the slope of the line through $(-1, 4)$ and $(3, -2)$. \hfill (4 pts)
+    \item Write the equation of a line with slope $-2$ passing through $(1, 5)$. \hfill (6 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\textbf{Question 4} (15 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item Find the equation of the line through $(2, 1)$ and $(4, 7)$. \hfill (6 pts)
+    \item Find the equation of the line perpendicular to $y = 3x - 2$ passing through $(6, 1)$. \hfill (5 pts)
+    \item Find the $x$-intercept and $y$-intercept of $2x - 5y = 10$. \hfill (4 pts)
+\end{enumerate}
+
+\newpage
+
+\subsection*{Part C: Polynomials (25 points)}
+
+\textbf{Question 5} (10 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item For $P(x) = 3x^3 - 2x^2 + x - 5$, state the degree, leading coefficient, and constant term. \hfill (3 pts)
+    \item Expand: $(2x - 3)^2$ \hfill (3 pts)
+    \item Expand: $(x + 4)(x - 4)$ \hfill (2 pts)
+    \item Find: $P(2)$ where $P(x) = x^2 - 3x + 1$ \hfill (2 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\textbf{Question 6} (15 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item Solve by factoring: $x^2 - 5x - 14 = 0$ \hfill (5 pts)
+    \item Solve using the quadratic formula: $2x^2 - 3x - 1 = 0$ \hfill (6 pts)
+    \item Use the discriminant to determine the nature of roots of $x^2 + 2x + 5 = 0$ \hfill (4 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\subsection*{Part D: Functions and Graphs (25 points)}
+
+\textbf{Question 7} (10 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item Find the domain of $f(x) = \frac{x + 1}{x - 4}$ \hfill (3 pts)
+    \item Find the domain of $g(x) = \sqrt{2x - 6}$ \hfill (3 pts)
+    \item State the domain and range of $h(x) = x^2 - 4$ \hfill (4 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\textbf{Question 8} (15 points)
+
+Let $f(x) = x^2 + 1$ and $g(x) = 3x - 2$.
+
+\begin{enumerate}[label=(\alph*)]
+    \item Find $(f + g)(x)$ \hfill (3 pts)
+    \item Find $(f \circ g)(x)$ \hfill (5 pts)
+    \item Find $(g \circ f)(2)$ \hfill (4 pts)
+    \item Describe the transformation from $y = x^2$ to $y = (x - 3)^2 + 2$ \hfill (3 pts)
+\end{enumerate}
+
+\newpage
+
+%-----------------------------------------------------------------------------
+\subsection*{Mock Exam 1 --- Solutions}
+%-----------------------------------------------------------------------------
+
+\begin{solution}
+\textbf{Question 1}
+
+(a) Classifications:
+\begin{itemize}
+    \item $\sqrt{25} = 5$: \textbf{Natural}
+    \item $-\frac{3}{7}$: \textbf{Rational}
+    \item $\pi$: \textbf{Irrational}
+    \item $0.\overline{6} = \frac{2}{3}$: \textbf{Rational}
+\end{itemize}
+
+(b) $\frac{2}{3} + \frac{5}{4} - \frac{1}{6} = \frac{8}{12} + \frac{15}{12} - \frac{2}{12} = \frac{21}{12} = \boxed{\frac{7}{4}}$
+
+(c) $4 + 2 \times 9 - 5 = 4 + 18 - 5 = \boxed{17}$
+\end{solution}
+
+\begin{solution}
+\textbf{Question 2}
+
+(a) $-3x + 5 \leq 14 \Rightarrow -3x \leq 9 \Rightarrow x \geq -3$
+
+Answer: $\boxed{[-3, \infty)}$
+
+(b) $2x - 6 > 4x + 2 \Rightarrow -2x > 8 \Rightarrow x < -4$
+
+Answer: $\boxed{(-\infty, -4)}$
+
+(c) $|{-4}| + |{-5}| - |2| = 4 + 5 - 2 = \boxed{7}$
+\end{solution}
+
+\begin{solution}
+\textbf{Question 3}
+
+(a) $m = \frac{-2 - 4}{3 - (-1)} = \frac{-6}{4} = \boxed{-\frac{3}{2}}$
+
+(b) Using point-slope: $y - 5 = -2(x - 1)$
+
+$y = -2x + 2 + 5 = \boxed{y = -2x + 7}$
+\end{solution}
+
+\begin{solution}
+\textbf{Question 4}
+
+(a) Slope: $m = \frac{7-1}{4-2} = 3$
+
+Point-slope: $y - 1 = 3(x - 2) \Rightarrow \boxed{y = 3x - 5}$
+
+(b) Perpendicular slope: $m_\perp = -\frac{1}{3}$
+
+$y - 1 = -\frac{1}{3}(x - 6) \Rightarrow y = -\frac{1}{3}x + 3 \Rightarrow \boxed{y = -\frac{1}{3}x + 3}$
+
+(c) $x$-intercept: $2x = 10 \Rightarrow x = 5$, point $(5, 0)$
+
+$y$-intercept: $-5y = 10 \Rightarrow y = -2$, point $(0, -2)$
+\end{solution}
+
+\begin{solution}
+\textbf{Question 5}
+
+(a) Degree: 3, Leading coefficient: 3, Constant term: $-5$
+
+(b) $(2x - 3)^2 = 4x^2 - 12x + 9$
+
+(c) $(x + 4)(x - 4) = x^2 - 16$
+
+(d) $P(2) = 4 - 6 + 1 = \boxed{-1}$
+\end{solution}
+
+\begin{solution}
+\textbf{Question 6}
+
+(a) $x^2 - 5x - 14 = (x - 7)(x + 2) = 0$
+
+$\boxed{x = 7 \text{ or } x = -2}$
+
+(b) $x = \frac{3 \pm \sqrt{9 + 8}}{4} = \frac{3 \pm \sqrt{17}}{4}$
+
+$\boxed{x = \frac{3 + \sqrt{17}}{4} \text{ or } x = \frac{3 - \sqrt{17}}{4}}$
+
+(c) $\Delta = 4 - 20 = -16 < 0$
+
+\textbf{No real roots} (two complex conjugate roots)
+\end{solution}
+
+\begin{solution}
+\textbf{Question 7}
+
+(a) Undefined when $x - 4 = 0$: Domain = $\boxed{(-\infty, 4) \cup (4, \infty)}$
+
+(b) Requires $2x - 6 \geq 0 \Rightarrow x \geq 3$: Domain = $\boxed{[3, \infty)}$
+
+(c) Domain: $(-\infty, \infty)$; Range: $[-4, \infty)$ (minimum at vertex $(0, -4)$)
+\end{solution}
+
+\begin{solution}
+\textbf{Question 8}
+
+(a) $(f + g)(x) = x^2 + 1 + 3x - 2 = \boxed{x^2 + 3x - 1}$
+
+(b) $(f \circ g)(x) = f(3x - 2) = (3x - 2)^2 + 1 = 9x^2 - 12x + 4 + 1 = \boxed{9x^2 - 12x + 5}$
+
+(c) $f(2) = 5$, $g(f(2)) = g(5) = 15 - 2 = \boxed{13}$
+
+(d) Shift \textbf{right 3 units} and \textbf{up 2 units}. Vertex moves to $(3, 2)$.
+\end{solution}
+
+\newpage
+
+%=============================================================================
+%=============================================================================
+\section*{Mock Exam 2}
+\addcontentsline{toc}{section}{Mock Exam 2}
+%=============================================================================
+%=============================================================================
+
+\examheader{2}
+
+\subsection*{Part A: Numbers and Arithmetic (25 points)}
+
+\textbf{Question 1} (12 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item True or False: Every integer is a rational number. Explain. \hfill (3 pts)
+    \item Convert $0.\overline{27}$ to a fraction in lowest terms. \hfill (4 pts)
+    \item Simplify: $\frac{5}{8} \times \frac{4}{15} \div \frac{1}{3}$ \hfill (5 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\textbf{Question 2} (13 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item Solve: $5 - 2x \geq 3x + 15$. Give answer in interval notation. \hfill (5 pts)
+    \item Express in interval notation: $-3 < x \leq 7$ \hfill (3 pts)
+    \item Solve: $|2x - 1| = 5$ \hfill (5 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\subsection*{Part B: Linear Functions (25 points)}
+
+\textbf{Question 3} (12 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item A line passes through $(0, -3)$ and $(4, 5)$. Find its equation in slope-intercept form. \hfill (6 pts)
+    \item Are the lines $y = 2x + 1$ and $y = -\frac{1}{2}x + 3$ parallel, perpendicular, or neither? Justify. \hfill (6 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\textbf{Question 4} (13 points)
+
+For the function $f(x) = -2x + 6$:
+\begin{enumerate}[label=(\alph*)]
+    \item Find $f(0)$, $f(3)$, and $f(-2)$ \hfill (4 pts)
+    \item Find the $x$-intercept and $y$-intercept \hfill (4 pts)
+    \item Sketch the graph \hfill (5 pts)
+\end{enumerate}
+
+\newpage
+
+\subsection*{Part C: Polynomials (25 points)}
+
+\textbf{Question 5} (12 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item Multiply: $(x + 2)(x^2 - 3x + 1)$ \hfill (5 pts)
+    \item Expand: $(a + b)^2 - (a - b)^2$ and simplify \hfill (4 pts)
+    \item Factor: $x^2 - 9x + 20$ \hfill (3 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\textbf{Question 6} (13 points)
+
+For the quadratic $f(x) = x^2 - 4x - 5$:
+\begin{enumerate}[label=(\alph*)]
+    \item Find the roots by factoring \hfill (4 pts)
+    \item Find the vertex \hfill (4 pts)
+    \item State whether the parabola opens up or down \hfill (2 pts)
+    \item State the axis of symmetry \hfill (3 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\subsection*{Part D: Functions and Graphs (25 points)}
+
+\textbf{Question 7} (12 points)
+
+For $P(x) = (x + 1)^2(x - 3)$:
+\begin{enumerate}[label=(\alph*)]
+    \item State the degree and leading coefficient \hfill (3 pts)
+    \item Find all roots and their multiplicities \hfill (3 pts)
+    \item Describe the end behavior \hfill (3 pts)
+    \item Does the graph cross or bounce at each root? \hfill (3 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\textbf{Question 8} (13 points)
+
+Let $f(x) = \sqrt{x}$ and $g(x) = x^2 - 4$.
+\begin{enumerate}[label=(\alph*)]
+    \item Find $(f \circ g)(x)$ and state its domain \hfill (6 pts)
+    \item Find $(g \circ f)(x)$ and state its domain \hfill (4 pts)
+    \item Is $f(x) = x^3 - 2x$ continuous everywhere? Why? \hfill (3 pts)
+\end{enumerate}
+
+\newpage
+
+%-----------------------------------------------------------------------------
+\subsection*{Mock Exam 2 --- Solutions}
+%-----------------------------------------------------------------------------
+
+\begin{solution}
+\textbf{Question 1}
+
+(a) \textbf{True}. Every integer $n$ can be written as $\frac{n}{1}$, which is a rational number.
+
+(b) Let $x = 0.\overline{27}$. Then $100x = 27.\overline{27}$.
+
+$99x = 27 \Rightarrow x = \frac{27}{99} = \boxed{\frac{3}{11}}$
+
+(c) $\frac{5}{8} \times \frac{4}{15} \div \frac{1}{3} = \frac{5}{8} \times \frac{4}{15} \times 3 = \frac{60}{120} = \boxed{\frac{1}{2}}$
+\end{solution}
+
+\begin{solution}
+\textbf{Question 2}
+
+(a) $5 - 2x \geq 3x + 15 \Rightarrow -5x \geq 10 \Rightarrow x \leq -2$
+
+Answer: $\boxed{(-\infty, -2]}$
+
+(b) $\boxed{(-3, 7]}$
+
+(c) $2x - 1 = 5$ or $2x - 1 = -5$
+
+$2x = 6$ or $2x = -4$
+
+$\boxed{x = 3 \text{ or } x = -2}$
+\end{solution}
+
+\begin{solution}
+\textbf{Question 3}
+
+(a) Slope: $m = \frac{5 - (-3)}{4 - 0} = \frac{8}{4} = 2$
+
+$y$-intercept is $(0, -3)$, so $b = -3$
+
+$\boxed{y = 2x - 3}$
+
+(b) Slopes are $m_1 = 2$ and $m_2 = -\frac{1}{2}$
+
+$m_1 \cdot m_2 = 2 \times (-\frac{1}{2}) = -1$
+
+The lines are \textbf{perpendicular} (product of slopes is $-1$).
+\end{solution}
+
+\begin{solution}
+\textbf{Question 4}
+
+(a) $f(0) = 6$, $f(3) = 0$, $f(-2) = 10$
+
+(b) $y$-intercept: $(0, 6)$
+
+$x$-intercept: $-2x + 6 = 0 \Rightarrow x = 3$, point $(3, 0)$
+
+(c) Line with slope $-2$, passing through $(0, 6)$ and $(3, 0)$.
+\end{solution}
+
+\begin{solution}
+\textbf{Question 5}
+
+(a) $(x + 2)(x^2 - 3x + 1) = x^3 - 3x^2 + x + 2x^2 - 6x + 2 = \boxed{x^3 - x^2 - 5x + 2}$
+
+(b) $(a^2 + 2ab + b^2) - (a^2 - 2ab + b^2) = 4ab = \boxed{4ab}$
+
+(c) $x^2 - 9x + 20 = \boxed{(x - 4)(x - 5)}$
+\end{solution}
+
+\begin{solution}
+\textbf{Question 6}
+
+(a) $x^2 - 4x - 5 = (x - 5)(x + 1) = 0$
+
+Roots: $\boxed{x = 5 \text{ and } x = -1}$
+
+(b) Vertex $x = -\frac{-4}{2} = 2$
+
+$f(2) = 4 - 8 - 5 = -9$
+
+Vertex: $\boxed{(2, -9)}$
+
+(c) Opens \textbf{up} ($a = 1 > 0$)
+
+(d) Axis of symmetry: $\boxed{x = 2}$
+\end{solution}
+
+\begin{solution}
+\textbf{Question 7}
+
+(a) Degree: $2 + 1 = 3$; Leading coefficient: $1$ (positive)
+
+(b) Roots: $x = -1$ (multiplicity 2), $x = 3$ (multiplicity 1)
+
+(c) Odd degree, positive leading coefficient:
+
+As $x \to -\infty$, $P(x) \to -\infty$; As $x \to +\infty$, $P(x) \to +\infty$
+
+(d) At $x = -1$: \textbf{bounces} (even multiplicity)
+
+At $x = 3$: \textbf{crosses} (odd multiplicity)
+\end{solution}
+
+\begin{solution}
+\textbf{Question 8}
+
+(a) $(f \circ g)(x) = f(x^2 - 4) = \sqrt{x^2 - 4}$
+
+Domain: $x^2 - 4 \geq 0 \Rightarrow x^2 \geq 4 \Rightarrow |x| \geq 2$
+
+Domain: $\boxed{(-\infty, -2] \cup [2, \infty)}$
+
+(b) $(g \circ f)(x) = g(\sqrt{x}) = (\sqrt{x})^2 - 4 = x - 4$
+
+Domain of $f$: $x \geq 0$
+
+Domain: $\boxed{[0, \infty)}$
+
+(c) \textbf{Yes}, $f(x) = x^3 - 2x$ is continuous everywhere because it is a polynomial.
+\end{solution}
+
+\newpage
+
+%=============================================================================
+%=============================================================================
+\section*{Mock Exam 3}
+\addcontentsline{toc}{section}{Mock Exam 3}
+%=============================================================================
+%=============================================================================
+
+\examheader{3}
+
+\subsection*{Part A: Numbers and Arithmetic (25 points)}
+
+\textbf{Question 1} (13 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item List all the number types that $-12$ belongs to (from the set $\{\mathbb{N}, \mathbb{Z}, \mathbb{Q}, \mathbb{R}\}$). \hfill (3 pts)
+    \item Evaluate: $\frac{1}{2} + \frac{1}{3} + \frac{1}{4}$ \hfill (4 pts)
+    \item Evaluate: $(2^3 - 5)^2 + 4 \times 2 - 1$ \hfill (3 pts)
+    \item Simplify: $\frac{|-6| - |4|}{|{-2}|}$ \hfill (3 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\textbf{Question 2} (12 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item Solve: $\frac{x + 3}{2} < 5$ \hfill (4 pts)
+    \item Solve: $-4 \leq 2x + 2 < 8$. Express in interval notation. \hfill (5 pts)
+    \item Write in interval notation: All real numbers except $x = 3$ \hfill (3 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\subsection*{Part B: Linear Functions (25 points)}
+
+\textbf{Question 3} (13 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item A horizontal line passes through $(4, -2)$. What is its equation? \hfill (3 pts)
+    \item Find the slope of a line parallel to $3x + 6y = 12$. \hfill (5 pts)
+    \item The points $(1, k)$ and $(4, 10)$ lie on a line with slope $2$. Find $k$. \hfill (5 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\textbf{Question 4} (12 points)
+
+A phone plan charges \$20 per month plus \$0.05 per text message.
+\begin{enumerate}[label=(\alph*)]
+    \item Write a linear function $C(x)$ for the monthly cost if $x$ messages are sent. \hfill (4 pts)
+    \item What is the cost for sending 200 messages? \hfill (3 pts)
+    \item How many messages can you send for \$35? \hfill (5 pts)
+\end{enumerate}
+
+\newpage
+
+\subsection*{Part C: Polynomials (25 points)}
+
+\textbf{Question 5} (12 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item Expand: $(x - 2)^3$ \hfill (5 pts)
+    \item Factor completely: $x^3 - 4x$ \hfill (4 pts)
+    \item Use the discriminant to determine how many real solutions $3x^2 - x + 2 = 0$ has. \hfill (3 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\textbf{Question 6} (13 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item Solve: $x^2 + 6x + 9 = 0$ \hfill (4 pts)
+    \item Complete the square to write $f(x) = x^2 + 4x + 1$ in vertex form. \hfill (5 pts)
+    \item For $f(x) = -(x - 1)^2 + 4$, state the vertex and whether it's a maximum or minimum. \hfill (4 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\subsection*{Part D: Functions and Graphs (25 points)}
+
+\textbf{Question 7} (12 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item Find the domain of $f(x) = \frac{3}{\sqrt{x - 1}}$ \hfill (4 pts)
+    \item Find the range of $g(x) = x^2 + 3$ \hfill (3 pts)
+    \item For $h(x) = -2x^4 + 5x^2 - 1$, describe the end behavior. \hfill (5 pts)
+\end{enumerate}
+
+\vspace{2cm}
+
+\textbf{Question 8} (13 points)
+
+\begin{enumerate}[label=(\alph*)]
+    \item Given $f(x) = 2x - 1$ and $g(x) = x^2$, find $(f \circ g)(x)$ and $(g \circ f)(x)$. \hfill (6 pts)
+    \item Starting with $y = |x|$, describe the transformations to get $y = 2|x - 1| - 3$. \hfill (4 pts)
+    \item Is $h(x) = \frac{x}{x-2}$ continuous at $x = 2$? Explain. \hfill (3 pts)
+\end{enumerate}
+
+\newpage
+
+%-----------------------------------------------------------------------------
+\subsection*{Mock Exam 3 --- Solutions}
+%-----------------------------------------------------------------------------
+
+\begin{solution}
+\textbf{Question 1}
+
+(a) $-12 \in \{\mathbb{Z}, \mathbb{Q}, \mathbb{R}\}$ (Integer, Rational, Real --- not Natural since negative)
+
+(b) $\frac{1}{2} + \frac{1}{3} + \frac{1}{4} = \frac{6}{12} + \frac{4}{12} + \frac{3}{12} = \boxed{\frac{13}{12}}$
+
+(c) $(8 - 5)^2 + 8 - 1 = 9 + 7 = \boxed{16}$
+
+(d) $\frac{6 - 4}{2} = \frac{2}{2} = \boxed{1}$
+\end{solution}
+
+\begin{solution}
+\textbf{Question 2}
+
+(a) $\frac{x + 3}{2} < 5 \Rightarrow x + 3 < 10 \Rightarrow x < 7$
+
+Answer: $\boxed{(-\infty, 7)}$
+
+(b) $-4 \leq 2x + 2 < 8$
+
+$-6 \leq 2x < 6$
+
+$-3 \leq x < 3$
+
+Answer: $\boxed{[-3, 3)}$
+
+(c) $\boxed{(-\infty, 3) \cup (3, \infty)}$
+\end{solution}
+
+\begin{solution}
+\textbf{Question 3}
+
+(a) Horizontal line: $\boxed{y = -2}$
+
+(b) Rewrite: $6y = -3x + 12 \Rightarrow y = -\frac{1}{2}x + 2$
+
+Slope: $-\frac{1}{2}$. Parallel line has same slope: $\boxed{m = -\frac{1}{2}}$
+
+(c) $m = \frac{10 - k}{4 - 1} = 2$
+
+$10 - k = 6 \Rightarrow k = \boxed{4}$
+\end{solution}
+
+\begin{solution}
+\textbf{Question 4}
+
+(a) $\boxed{C(x) = 20 + 0.05x}$
+
+(b) $C(200) = 20 + 10 = \boxed{\$30}$
+
+(c) $35 = 20 + 0.05x \Rightarrow 15 = 0.05x \Rightarrow x = \boxed{300}$ messages
+\end{solution}
+
+\begin{solution}
+\textbf{Question 5}
+
+(a) $(x - 2)^3 = x^3 - 3(x^2)(2) + 3(x)(4) - 8 = \boxed{x^3 - 6x^2 + 12x - 8}$
+
+(b) $x^3 - 4x = x(x^2 - 4) = \boxed{x(x - 2)(x + 2)}$
+
+(c) $\Delta = 1 - 24 = -23 < 0$
+
+\textbf{No real solutions} (discriminant negative)
+\end{solution}
+
+\begin{solution}
+\textbf{Question 6}
+
+(a) $x^2 + 6x + 9 = (x + 3)^2 = 0$
+
+$\boxed{x = -3}$ (repeated root)
+
+(b) $f(x) = x^2 + 4x + 1 = (x^2 + 4x + 4) - 3 = \boxed{(x + 2)^2 - 3}$
+
+Vertex: $(-2, -3)$
+
+(c) Vertex: $(1, 4)$
+
+Since $a = -1 < 0$, parabola opens down.
+
+This is a \textbf{maximum} at $y = 4$.
+\end{solution}
+
+\begin{solution}
+\textbf{Question 7}
+
+(a) Need $x - 1 > 0$ (strict, since in denominator under square root)
+
+Domain: $\boxed{(1, \infty)}$
+
+(b) $g(x) = x^2 + 3 \geq 3$ for all $x$
+
+Range: $\boxed{[3, \infty)}$
+
+(c) Degree 4 (even), leading coefficient $-2$ (negative)
+
+Both ends: $h(x) \to -\infty$ as $x \to \pm\infty$
+\end{solution}
+
+\begin{solution}
+\textbf{Question 8}
+
+(a) $(f \circ g)(x) = f(x^2) = 2x^2 - 1$
+
+$(g \circ f)(x) = g(2x - 1) = (2x - 1)^2 = 4x^2 - 4x + 1$
+
+(b) Transformations from $y = |x|$ to $y = 2|x - 1| - 3$:
+\begin{enumerate}
+    \item Shift right 1 unit: $|x - 1|$
+    \item Vertical stretch by factor 2: $2|x - 1|$
+    \item Shift down 3 units: $2|x - 1| - 3$
+\end{enumerate}
+
+(c) \textbf{No}, $h(x) = \frac{x}{x-2}$ is not continuous at $x = 2$ because the function is undefined there (division by zero). This is an \textbf{infinite discontinuity} (vertical asymptote).
+\end{solution}
+
+\end{document}

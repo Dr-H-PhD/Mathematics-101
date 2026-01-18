@@ -1,0 +1,815 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage[top=2cm,bottom=2cm,left=2.5cm,right=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\tcbuselibrary{breakable,skins}
+
+% Exercise/Solution environment
+\newcounter{exercise}[section]
+\newenvironment{exercise}{\refstepcounter{exercise}\par\medskip\noindent\textbf{Exercise \thesection.\theexercise.}}{\par\medskip}
+
+\newtcolorbox{solution}{
+    colback=green!5!white,
+    colframe=green!60!black,
+    fonttitle=\bfseries,
+    title=Solution,
+    breakable,
+    before skip=6pt,
+    after skip=6pt
+}
+
+\title{\textbf{Numerical Analysis: Exercises and Solutions}\\[0.5cm]
+\large Computational Methods for Mathematical Problems\\
+Mathematics 101}
+\author{SOLTANI Achraf}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+%=============================================================================
+\section{Errors and Approximations}
+%=============================================================================
+
+\subsection{Error Calculations}
+
+\begin{exercise}
+The exact value of $\sqrt{2}$ is $1.41421356...$. If we approximate it as $\tilde{x} = 1.414$, calculate:
+\begin{enumerate}[label=(\alph*)]
+    \item The absolute error
+    \item The relative error (as a percentage)
+\end{enumerate}
+\end{exercise}
+
+\begin{solution}
+Let $x = 1.41421356$ and $\tilde{x} = 1.414$.
+
+\begin{enumerate}[label=(\alph*)]
+    \item Absolute error:
+    \[E_a = |x - \tilde{x}| = |1.41421356 - 1.414| = \boxed{0.00021356}\]
+
+    \item Relative error:
+    \[E_r = \frac{|x - \tilde{x}|}{|x|} = \frac{0.00021356}{1.41421356} \approx 0.000151 = \boxed{0.0151\%}\]
+\end{enumerate}
+\end{solution}
+
+\begin{exercise}
+A measurement device reports a length of $15.7$ cm with a relative error of $2\%$. Find the range of possible true values.
+\end{exercise}
+
+\begin{solution}
+Relative error $= 2\% = 0.02$
+
+Absolute error $= 0.02 \times 15.7 = 0.314$ cm
+
+True value range: $15.7 \pm 0.314$
+
+$\boxed{[15.386, 16.014] \text{ cm}}$
+\end{solution}
+
+\begin{exercise}
+Compute $f(x) = \sqrt{x + 1} - \sqrt{x}$ for $x = 10000$ using:
+\begin{enumerate}[label=(\alph*)]
+    \item Direct calculation (using 6 significant figures)
+    \item The rationalized formula $\frac{1}{\sqrt{x+1} + \sqrt{x}}$
+\end{enumerate}
+Compare the results and explain which is more accurate.
+\end{exercise}
+
+\begin{solution}
+\begin{enumerate}[label=(\alph*)]
+    \item Direct calculation:
+    \begin{align*}
+    \sqrt{10001} &\approx 100.005\\
+    \sqrt{10000} &= 100.000\\
+    \sqrt{10001} - \sqrt{10000} &\approx 0.005
+    \end{align*}
+    (Lost significant figures due to catastrophic cancellation)
+
+    \item Rationalized formula:
+    \[\frac{1}{\sqrt{10001} + \sqrt{10000}} = \frac{1}{100.005 + 100} = \frac{1}{200.005} \approx \boxed{0.00499987}\]
+\end{enumerate}
+
+The rationalized formula is more accurate because it avoids subtracting nearly equal numbers. The direct method loses precision due to catastrophic cancellation.
+\end{solution}
+
+\begin{exercise}
+How many iterations of the bisection method are needed to guarantee an error less than $10^{-6}$ starting with interval $[0, 1]$?
+\end{exercise}
+
+\begin{solution}
+After $n$ iterations, the error bound is $\frac{b-a}{2^{n+1}}$.
+
+We need:
+\[\frac{1-0}{2^{n+1}} < 10^{-6}\]
+\[2^{n+1} > 10^6\]
+\[(n+1)\log 2 > 6\log 10\]
+\[n+1 > \frac{6}{0.301} \approx 19.93\]
+\[n \geq 19\]
+
+$\boxed{n = 19 \text{ iterations}}$
+\end{solution}
+
+%=============================================================================
+\section{Root Finding Methods}
+%=============================================================================
+
+\subsection{Bisection Method}
+
+\begin{exercise}
+Use the bisection method to find a root of $f(x) = x^3 - x - 1$ in the interval $[1, 2]$. Perform 4 iterations.
+\end{exercise}
+
+\begin{solution}
+First verify: $f(1) = 1 - 1 - 1 = -1 < 0$ and $f(2) = 8 - 2 - 1 = 5 > 0$. \checkmark
+
+\begin{center}
+\begin{tabular}{cccccc}
+\toprule
+$n$ & $a$ & $b$ & $c = \frac{a+b}{2}$ & $f(c)$ & New interval \\
+\midrule
+1 & 1.0 & 2.0 & 1.5 & $1.875$ & $[1, 1.5]$ \\
+2 & 1.0 & 1.5 & 1.25 & $-0.297$ & $[1.25, 1.5]$ \\
+3 & 1.25 & 1.5 & 1.375 & $0.599$ & $[1.25, 1.375]$ \\
+4 & 1.25 & 1.375 & 1.3125 & $0.106$ & $[1.25, 1.3125]$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+After 4 iterations: $\boxed{r \approx 1.3125}$ with error $\leq \frac{1}{2^5} = 0.03125$
+\end{solution}
+
+\begin{exercise}
+Show that $f(x) = e^x - 3x = 0$ has a root in $[0, 1]$ and find it using 3 iterations of bisection.
+\end{exercise}
+
+\begin{solution}
+$f(0) = e^0 - 0 = 1 > 0$
+
+$f(1) = e^1 - 3 = 2.718 - 3 = -0.282 < 0$
+
+Sign change confirms root exists in $[0, 1]$.
+
+\begin{center}
+\begin{tabular}{cccccc}
+\toprule
+$n$ & $a$ & $b$ & $c$ & $f(c)$ & New interval \\
+\midrule
+1 & 0 & 1 & 0.5 & $0.148$ & $[0.5, 1]$ \\
+2 & 0.5 & 1 & 0.75 & $-0.133$ & $[0.5, 0.75]$ \\
+3 & 0.5 & 0.75 & 0.625 & $-0.007$ & $[0.5, 0.625]$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+$\boxed{r \approx 0.625}$
+\end{solution}
+
+\subsection{Newton-Raphson Method}
+
+\begin{exercise}
+Use Newton-Raphson to find $\sqrt{3}$ by solving $f(x) = x^2 - 3 = 0$. Start with $x_0 = 2$ and perform 3 iterations.
+\end{exercise}
+
+\begin{solution}
+$f(x) = x^2 - 3$, $f'(x) = 2x$
+
+Newton-Raphson formula: $x_{n+1} = x_n - \frac{x_n^2 - 3}{2x_n} = \frac{x_n^2 + 3}{2x_n} = \frac{1}{2}\left(x_n + \frac{3}{x_n}\right)$
+
+\begin{align*}
+x_0 &= 2\\
+x_1 &= \frac{1}{2}\left(2 + \frac{3}{2}\right) = \frac{1}{2}(3.5) = 1.75\\
+x_2 &= \frac{1}{2}\left(1.75 + \frac{3}{1.75}\right) = \frac{1}{2}(1.75 + 1.714) = 1.7321\\
+x_3 &= \frac{1}{2}\left(1.7321 + \frac{3}{1.7321}\right) = 1.7320508...
+\end{align*}
+
+$\sqrt{3} = 1.7320508...$
+
+After 3 iterations: $\boxed{x_3 = 1.7320508}$ (7 correct decimal places!)
+\end{solution}
+
+\begin{exercise}
+Apply Newton-Raphson to $f(x) = x^3 - 2x - 5 = 0$ with $x_0 = 2$. Perform 3 iterations.
+\end{exercise}
+
+\begin{solution}
+$f(x) = x^3 - 2x - 5$, $f'(x) = 3x^2 - 2$
+
+$x_{n+1} = x_n - \frac{x_n^3 - 2x_n - 5}{3x_n^2 - 2}$
+
+\begin{align*}
+x_0 &= 2\\
+f(2) &= 8 - 4 - 5 = -1\\
+f'(2) &= 12 - 2 = 10\\
+x_1 &= 2 - \frac{-1}{10} = 2.1\\[2mm]
+f(2.1) &= 9.261 - 4.2 - 5 = 0.061\\
+f'(2.1) &= 13.23 - 2 = 11.23\\
+x_2 &= 2.1 - \frac{0.061}{11.23} = 2.0946\\[2mm]
+f(2.0946) &= 9.191 - 4.189 - 5 = 0.002\\
+f'(2.0946) &= 13.16 - 2 = 11.16\\
+x_3 &= 2.0946 - \frac{0.002}{11.16} = 2.09455
+\end{align*}
+
+$\boxed{x_3 \approx 2.0946}$
+\end{solution}
+
+\begin{exercise}
+Why might Newton-Raphson fail for $f(x) = x^{1/3}$ starting at $x_0 = 1$?
+\end{exercise}
+
+\begin{solution}
+$f(x) = x^{1/3}$, $f'(x) = \frac{1}{3}x^{-2/3} = \frac{1}{3x^{2/3}}$
+
+Newton-Raphson: $x_{n+1} = x_n - \frac{x_n^{1/3}}{\frac{1}{3}x_n^{-2/3}} = x_n - 3x_n = -2x_n$
+
+Starting with $x_0 = 1$:
+\begin{align*}
+x_1 &= -2(1) = -2\\
+x_2 &= -2(-2) = 4\\
+x_3 &= -2(4) = -8\\
+&\vdots
+\end{align*}
+
+The method \textbf{diverges} because $|x_n| \to \infty$. This happens because the tangent line at any point (except $x=0$) intersects the $x$-axis farther from the root than the starting point. The function has a vertical tangent at the root $x = 0$.
+\end{solution}
+
+\subsection{Secant Method}
+
+\begin{exercise}
+Use the secant method to find a root of $f(x) = x^3 - x - 1$ with $x_0 = 1$ and $x_1 = 2$. Perform 3 iterations.
+\end{exercise}
+
+\begin{solution}
+$x_{n+1} = x_n - f(x_n)\frac{x_n - x_{n-1}}{f(x_n) - f(x_{n-1})}$
+
+$f(1) = -1$, $f(2) = 5$
+
+\begin{align*}
+x_2 &= 2 - 5 \cdot \frac{2-1}{5-(-1)} = 2 - \frac{5}{6} = 1.1667\\
+f(1.1667) &= 1.587 - 1.167 - 1 = -0.580\\[2mm]
+x_3 &= 1.1667 - (-0.580) \cdot \frac{1.1667 - 2}{-0.580 - 5} = 1.1667 - \frac{0.483}{5.58} = 1.2532\\
+f(1.2532) &= -0.283\\[2mm]
+x_4 &= 1.2532 - (-0.283) \cdot \frac{1.2532 - 1.1667}{-0.283 - (-0.580)} = 1.3313
+\end{align*}
+
+$\boxed{x_4 \approx 1.3313}$
+\end{solution}
+
+\subsection{Fixed-Point Iteration}
+
+\begin{exercise}
+Rearrange $x^3 - x - 1 = 0$ as $x = g(x)$ in two ways:
+\begin{enumerate}[label=(\alph*)]
+    \item $x = x^3 - 1$
+    \item $x = (x + 1)^{1/3}$
+\end{enumerate}
+Test convergence for each starting from $x_0 = 1.5$ by checking $|g'(x)|$ at the root (approximately $r = 1.3247$).
+\end{exercise}
+
+\begin{solution}
+\begin{enumerate}[label=(\alph*)]
+    \item $g(x) = x^3 - 1$, $g'(x) = 3x^2$
+
+    At $r \approx 1.3247$: $|g'(1.3247)| = 3(1.3247)^2 \approx 5.26 > 1$
+
+    \textbf{Will diverge} (fails convergence criterion)
+
+    \item $g(x) = (x + 1)^{1/3}$, $g'(x) = \frac{1}{3}(x+1)^{-2/3}$
+
+    At $r \approx 1.3247$: $|g'(1.3247)| = \frac{1}{3}(2.3247)^{-2/3} \approx 0.19 < 1$
+
+    \textbf{Will converge} \checkmark
+\end{enumerate}
+
+Iteration with $g(x) = (x+1)^{1/3}$:
+\begin{align*}
+x_0 &= 1.5\\
+x_1 &= (2.5)^{1/3} = 1.357\\
+x_2 &= (2.357)^{1/3} = 1.331\\
+x_3 &= (2.331)^{1/3} = 1.326
+\end{align*}
+
+Converging to $\boxed{r \approx 1.3247}$
+\end{solution}
+
+%=============================================================================
+\section{Interpolation}
+%=============================================================================
+
+\subsection{Lagrange Interpolation}
+
+\begin{exercise}
+Find the Lagrange interpolating polynomial through $(0, 1)$, $(1, 2)$, $(2, 5)$.
+\end{exercise}
+
+\begin{solution}
+Lagrange basis polynomials:
+\begin{align*}
+L_0(x) &= \frac{(x-1)(x-2)}{(0-1)(0-2)} = \frac{(x-1)(x-2)}{2}\\
+L_1(x) &= \frac{(x-0)(x-2)}{(1-0)(1-2)} = \frac{x(x-2)}{-1} = -x(x-2)\\
+L_2(x) &= \frac{(x-0)(x-1)}{(2-0)(2-1)} = \frac{x(x-1)}{2}
+\end{align*}
+
+Interpolating polynomial:
+\begin{align*}
+P_2(x) &= 1 \cdot L_0(x) + 2 \cdot L_1(x) + 5 \cdot L_2(x)\\
+&= \frac{(x-1)(x-2)}{2} - 2x(x-2) + \frac{5x(x-1)}{2}\\
+&= \frac{x^2 - 3x + 2}{2} - 2x^2 + 4x + \frac{5x^2 - 5x}{2}\\
+&= \frac{x^2 - 3x + 2 - 4x^2 + 8x + 5x^2 - 5x}{2}\\
+&= \frac{2x^2 + 2}{2} = \boxed{x^2 + 1}
+\end{align*}
+
+Verify: $P(0) = 1$, $P(1) = 2$, $P(2) = 5$ \checkmark
+\end{solution}
+
+\begin{exercise}
+Use Lagrange interpolation to estimate $f(2.5)$ given:
+\begin{center}
+\begin{tabular}{c|cccc}
+$x$ & 1 & 2 & 3 & 4 \\
+\hline
+$f(x)$ & 0 & 1 & 8 & 27
+\end{tabular}
+\end{center}
+(Note: The exact function is $f(x) = (x-1)^3$)
+\end{exercise}
+
+\begin{solution}
+At $x = 2.5$:
+\begin{align*}
+L_0(2.5) &= \frac{(2.5-2)(2.5-3)(2.5-4)}{(1-2)(1-3)(1-4)} = \frac{(0.5)(-0.5)(-1.5)}{(-1)(-2)(-3)} = \frac{0.375}{-6} = -0.0625\\
+L_1(2.5) &= \frac{(2.5-1)(2.5-3)(2.5-4)}{(2-1)(2-3)(2-4)} = \frac{(1.5)(-0.5)(-1.5)}{(1)(-1)(-2)} = \frac{1.125}{2} = 0.5625\\
+L_2(2.5) &= \frac{(2.5-1)(2.5-2)(2.5-4)}{(3-1)(3-2)(3-4)} = \frac{(1.5)(0.5)(-1.5)}{(2)(1)(-1)} = \frac{-1.125}{-2} = 0.5625\\
+L_3(2.5) &= \frac{(2.5-1)(2.5-2)(2.5-3)}{(4-1)(4-2)(4-3)} = \frac{(1.5)(0.5)(-0.5)}{(3)(2)(1)} = \frac{-0.375}{6} = -0.0625
+\end{align*}
+
+\begin{align*}
+P_3(2.5) &= 0(-0.0625) + 1(0.5625) + 8(0.5625) + 27(-0.0625)\\
+&= 0 + 0.5625 + 4.5 - 1.6875\\
+&= \boxed{3.375}
+\end{align*}
+
+Exact: $(2.5-1)^3 = 1.5^3 = 3.375$ \checkmark
+\end{solution}
+
+\subsection{Newton's Divided Differences}
+
+\begin{exercise}
+Construct the divided difference table for the data:
+\begin{center}
+\begin{tabular}{c|cccc}
+$x$ & 0 & 1 & 2 & 4 \\
+\hline
+$f(x)$ & 1 & 1 & 2 & 5
+\end{tabular}
+\end{center}
+Write the Newton interpolating polynomial.
+\end{exercise}
+
+\begin{solution}
+Divided difference table:
+\begin{center}
+\begin{tabular}{c|c|c|c|c}
+$x_i$ & $f[x_i]$ & $f[\cdot,\cdot]$ & $f[\cdot,\cdot,\cdot]$ & $f[\cdot,\cdot,\cdot,\cdot]$ \\
+\hline
+0 & 1 & & & \\
+  &   & $\frac{1-1}{1-0}=0$ & & \\
+1 & 1 &  & $\frac{1-0}{2-0}=\frac{1}{2}$ & \\
+  &   & $\frac{2-1}{2-1}=1$ &  & $\frac{-\frac{1}{6}-\frac{1}{2}}{4-0}=-\frac{1}{6}$ \\
+2 & 2 &  & $\frac{\frac{3}{2}-1}{4-1}=\frac{1}{6}$ & \\
+  &   & $\frac{5-2}{4-2}=\frac{3}{2}$ & & \\
+4 & 5 & & & \\
+\end{tabular}
+\end{center}
+
+Wait, let me recalculate:
+$f[x_2,x_3] = \frac{5-2}{4-2} = \frac{3}{2}$, $f[x_1,x_2,x_3] = \frac{\frac{3}{2}-1}{4-1} = \frac{1}{6}$
+
+$f[x_0,x_1,x_2,x_3] = \frac{\frac{1}{6}-\frac{1}{2}}{4-0} = \frac{-\frac{1}{3}}{4} = -\frac{1}{12}$
+
+Newton's polynomial:
+\begin{align*}
+P_3(x) &= f[x_0] + f[x_0,x_1](x-x_0) + f[x_0,x_1,x_2](x-x_0)(x-x_1)\\
+&\quad + f[x_0,x_1,x_2,x_3](x-x_0)(x-x_1)(x-x_2)\\
+&= 1 + 0(x) + \frac{1}{2}x(x-1) - \frac{1}{12}x(x-1)(x-2)
+\end{align*}
+
+$\boxed{P_3(x) = 1 + \frac{1}{2}x(x-1) - \frac{1}{12}x(x-1)(x-2)}$
+\end{solution}
+
+%=============================================================================
+\section{Numerical Differentiation and Integration}
+%=============================================================================
+
+\subsection{Numerical Differentiation}
+
+\begin{exercise}
+Given $f(x) = \sin(x)$, approximate $f'(0.5)$ using $h = 0.1$:
+\begin{enumerate}[label=(\alph*)]
+    \item Forward difference
+    \item Central difference
+\end{enumerate}
+Compare with the exact value.
+\end{exercise}
+
+\begin{solution}
+$f(0.4) = \sin(0.4) = 0.38942$, $f(0.5) = \sin(0.5) = 0.47943$, $f(0.6) = \sin(0.6) = 0.56464$
+
+\begin{enumerate}[label=(\alph*)]
+    \item Forward difference:
+    \[f'(0.5) \approx \frac{f(0.6) - f(0.5)}{0.1} = \frac{0.56464 - 0.47943}{0.1} = \boxed{0.8521}\]
+
+    \item Central difference:
+    \[f'(0.5) \approx \frac{f(0.6) - f(0.4)}{0.2} = \frac{0.56464 - 0.38942}{0.2} = \boxed{0.8761}\]
+\end{enumerate}
+
+Exact: $f'(x) = \cos(x)$, so $f'(0.5) = \cos(0.5) = 0.87758$
+
+Central difference error: $|0.8761 - 0.8776| = 0.0015$
+
+Forward difference error: $|0.8521 - 0.8776| = 0.0255$
+
+Central difference is more accurate (as expected, since it's $O(h^2)$ vs $O(h)$).
+\end{solution}
+
+\begin{exercise}
+Approximate $f''(1)$ for $f(x) = e^x$ using the central difference formula with $h = 0.1$.
+\end{exercise}
+
+\begin{solution}
+$f''(x) \approx \frac{f(x+h) - 2f(x) + f(x-h)}{h^2}$
+
+$f(0.9) = e^{0.9} = 2.4596$, $f(1) = e^1 = 2.7183$, $f(1.1) = e^{1.1} = 3.0042$
+
+\[f''(1) \approx \frac{3.0042 - 2(2.7183) + 2.4596}{0.01} = \frac{0.0272}{0.01} = \boxed{2.72}\]
+
+Exact: $f''(x) = e^x$, so $f''(1) = e = 2.7183$
+
+Error: $|2.72 - 2.7183| = 0.002$ \checkmark
+\end{solution}
+
+\subsection{Numerical Integration}
+
+\begin{exercise}
+Approximate $\int_0^1 e^{-x^2}\, dx$ using:
+\begin{enumerate}[label=(\alph*)]
+    \item Trapezoidal rule with $n = 4$
+    \item Simpson's rule with $n = 4$
+\end{enumerate}
+\end{exercise}
+
+\begin{solution}
+$h = \frac{1-0}{4} = 0.25$
+
+Points: $x_0 = 0$, $x_1 = 0.25$, $x_2 = 0.5$, $x_3 = 0.75$, $x_4 = 1$
+
+Function values:
+\begin{align*}
+f(0) &= e^0 = 1\\
+f(0.25) &= e^{-0.0625} = 0.9394\\
+f(0.5) &= e^{-0.25} = 0.7788\\
+f(0.75) &= e^{-0.5625} = 0.5698\\
+f(1) &= e^{-1} = 0.3679
+\end{align*}
+
+\begin{enumerate}[label=(\alph*)]
+    \item Trapezoidal rule:
+    \begin{align*}
+    I &\approx \frac{h}{2}[f_0 + 2(f_1 + f_2 + f_3) + f_4]\\
+    &= \frac{0.25}{2}[1 + 2(0.9394 + 0.7788 + 0.5698) + 0.3679]\\
+    &= 0.125[1 + 4.576 + 0.3679]\\
+    &= 0.125 \times 5.944 = \boxed{0.7430}
+    \end{align*}
+
+    \item Simpson's rule:
+    \begin{align*}
+    I &\approx \frac{h}{3}[f_0 + 4(f_1 + f_3) + 2f_2 + f_4]\\
+    &= \frac{0.25}{3}[1 + 4(0.9394 + 0.5698) + 2(0.7788) + 0.3679]\\
+    &= \frac{0.25}{3}[1 + 6.0368 + 1.5576 + 0.3679]\\
+    &= \frac{0.25}{3} \times 8.9623 = \boxed{0.7469}
+    \end{align*}
+\end{enumerate}
+
+(The "exact" value is approximately $0.7468$, so Simpson's rule is more accurate.)
+\end{solution}
+
+\begin{exercise}
+How many subintervals are needed for the trapezoidal rule to approximate $\int_0^2 x^2\, dx$ with error less than $0.01$?
+\end{exercise}
+
+\begin{solution}
+For trapezoidal rule, error $\leq \frac{(b-a)^3}{12n^2}|f''(\xi)|$ for some $\xi \in [a,b]$.
+
+$f(x) = x^2$, $f''(x) = 2$
+
+\[\frac{(2-0)^3}{12n^2} \cdot 2 < 0.01\]
+\[\frac{16}{12n^2} < 0.01\]
+\[\frac{4}{3n^2} < 0.01\]
+\[n^2 > \frac{4}{0.03} = 133.3\]
+\[n > 11.5\]
+
+$\boxed{n = 12 \text{ subintervals}}$
+\end{solution}
+
+%=============================================================================
+\section{Systems of Linear Equations}
+%=============================================================================
+
+\subsection{Gaussian Elimination}
+
+\begin{exercise}
+Solve using Gaussian elimination with back substitution:
+\[
+\begin{cases}
+2x + y - z = 8\\
+-3x - y + 2z = -11\\
+-2x + y + 2z = -3
+\end{cases}
+\]
+\end{exercise}
+
+\begin{solution}
+Augmented matrix:
+\[
+\left[\begin{array}{ccc|c}
+2 & 1 & -1 & 8\\
+-3 & -1 & 2 & -11\\
+-2 & 1 & 2 & -3
+\end{array}\right]
+\]
+
+$R_2 \leftarrow R_2 + \frac{3}{2}R_1$, $R_3 \leftarrow R_3 + R_1$:
+\[
+\left[\begin{array}{ccc|c}
+2 & 1 & -1 & 8\\
+0 & \frac{1}{2} & \frac{1}{2} & 1\\
+0 & 2 & 1 & 5
+\end{array}\right]
+\]
+
+$R_3 \leftarrow R_3 - 4R_2$:
+\[
+\left[\begin{array}{ccc|c}
+2 & 1 & -1 & 8\\
+0 & \frac{1}{2} & \frac{1}{2} & 1\\
+0 & 0 & -1 & 1
+\end{array}\right]
+\]
+
+Back substitution:
+\begin{align*}
+-z &= 1 \Rightarrow z = -1\\
+\frac{1}{2}y + \frac{1}{2}(-1) &= 1 \Rightarrow y = 3\\
+2x + 3 - (-1) &= 8 \Rightarrow x = 2
+\end{align*}
+
+$\boxed{x = 2, \quad y = 3, \quad z = -1}$
+\end{solution}
+
+\begin{exercise}
+Why is partial pivoting important? Solve this system with and without pivoting:
+\[
+\begin{cases}
+0.0001x + y = 1\\
+x + y = 2
+\end{cases}
+\]
+using 3-digit arithmetic.
+\end{exercise}
+
+\begin{solution}
+\textbf{Without pivoting:}
+
+Multiplier: $m = \frac{1}{0.0001} = 10000$
+
+$R_2 \leftarrow R_2 - 10000 \cdot R_1$:
+\[y - 10000y = 2 - 10000 \Rightarrow -9999y = -9998\]
+
+In 3-digit arithmetic: $y \approx 1.00$, then $x = 2 - 1 = 1$
+
+But actual: $y = \frac{9998}{9999} \approx 0.9999$, $x \approx 1.0001$
+
+\textbf{With pivoting} (swap rows first):
+\[
+\begin{cases}
+x + y = 2\\
+0.0001x + y = 1
+\end{cases}
+\]
+
+Multiplier: $m = 0.0001$
+
+$R_2 \leftarrow R_2 - 0.0001 \cdot R_1$:
+\[y - 0.0001y = 1 - 0.0002 \Rightarrow 0.9999y = 0.9998\]
+
+$y = 0.9999 \approx 1.00$, $x = 2 - 1 = 1.00$
+
+Pivoting gives more stable results because it avoids division by small numbers.
+\end{solution}
+
+\subsection{Iterative Methods}
+
+\begin{exercise}
+Apply 3 iterations of the Jacobi method to:
+\[
+\begin{cases}
+4x - y = 15\\
+-x + 5y = 10
+\end{cases}
+\]
+starting with $x_0 = 0$, $y_0 = 0$.
+\end{exercise}
+
+\begin{solution}
+Rearranged:
+\[x = \frac{15 + y}{4}, \quad y = \frac{10 + x}{5}\]
+
+\begin{center}
+\begin{tabular}{c|cc}
+\toprule
+$k$ & $x^{(k)}$ & $y^{(k)}$ \\
+\midrule
+0 & 0 & 0 \\
+1 & $\frac{15+0}{4} = 3.75$ & $\frac{10+0}{5} = 2$ \\
+2 & $\frac{15+2}{4} = 4.25$ & $\frac{10+3.75}{5} = 2.75$ \\
+3 & $\frac{15+2.75}{4} = 4.4375$ & $\frac{10+4.25}{5} = 2.85$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+After 3 iterations: $\boxed{x \approx 4.44, \quad y \approx 2.85}$
+
+(Exact solution: $x = 5$, $y = 3$)
+\end{solution}
+
+\begin{exercise}
+For the same system, perform 3 iterations of Gauss-Seidel starting from $(0, 0)$.
+\end{exercise}
+
+\begin{solution}
+Gauss-Seidel uses updated values immediately:
+
+\begin{align*}
+k = 1: \quad x^{(1)} &= \frac{15 + y^{(0)}}{4} = \frac{15 + 0}{4} = 3.75\\
+y^{(1)} &= \frac{10 + x^{(1)}}{5} = \frac{10 + 3.75}{5} = 2.75\\[2mm]
+k = 2: \quad x^{(2)} &= \frac{15 + 2.75}{4} = 4.4375\\
+y^{(2)} &= \frac{10 + 4.4375}{5} = 2.8875\\[2mm]
+k = 3: \quad x^{(3)} &= \frac{15 + 2.8875}{4} = 4.4719\\
+y^{(3)} &= \frac{10 + 4.4719}{5} = 2.8944
+\end{align*}
+
+After 3 iterations: $\boxed{x \approx 4.47, \quad y \approx 2.89}$
+
+Gauss-Seidel converges faster than Jacobi (closer to exact solution $x=5$, $y=3$).
+\end{solution}
+
+%=============================================================================
+\section{Numerical Solutions of ODEs}
+%=============================================================================
+
+\subsection{Euler's Method}
+
+\begin{exercise}
+Use Euler's method with $h = 0.2$ to approximate $y(1)$ for:
+\[y' = y, \quad y(0) = 1\]
+Compare with the exact solution.
+\end{exercise}
+
+\begin{solution}
+$f(t, y) = y$, $h = 0.2$, steps from $t = 0$ to $t = 1$ (5 steps)
+
+Euler: $y_{n+1} = y_n + h \cdot y_n = y_n(1 + h) = 1.2 y_n$
+
+\begin{center}
+\begin{tabular}{c|c|c|c}
+\toprule
+$n$ & $t_n$ & $y_n$ (Euler) & $y(t_n)$ (Exact) \\
+\midrule
+0 & 0.0 & 1.0000 & 1.0000 \\
+1 & 0.2 & 1.2000 & 1.2214 \\
+2 & 0.4 & 1.4400 & 1.4918 \\
+3 & 0.6 & 1.7280 & 1.8221 \\
+4 & 0.8 & 2.0736 & 2.2255 \\
+5 & 1.0 & 2.4883 & 2.7183 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Euler approximation: $\boxed{y(1) \approx 2.4883}$
+
+Exact: $y = e^t$, so $y(1) = e \approx 2.7183$
+
+Error: $|2.4883 - 2.7183| = 0.23$ (about 8.5\%)
+\end{solution}
+
+\begin{exercise}
+Apply Euler's method with $h = 0.1$ to solve $y' = -2ty$, $y(0) = 1$ for $0 \leq t \leq 0.5$.
+\end{exercise}
+
+\begin{solution}
+$f(t, y) = -2ty$
+
+\begin{center}
+\begin{tabular}{c|c|c|c}
+\toprule
+$n$ & $t_n$ & $y_n$ & $y_{n+1} = y_n + 0.1(-2t_ny_n)$ \\
+\midrule
+0 & 0.0 & 1.0000 & $1 + 0.1(0) = 1.0000$ \\
+1 & 0.1 & 1.0000 & $1 + 0.1(-0.2) = 0.9800$ \\
+2 & 0.2 & 0.9800 & $0.98 + 0.1(-0.392) = 0.9408$ \\
+3 & 0.3 & 0.9408 & $0.9408 + 0.1(-0.5645) = 0.8844$ \\
+4 & 0.4 & 0.8844 & $0.8844 + 0.1(-0.7075) = 0.8136$ \\
+5 & 0.5 & 0.8136 & -- \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+$\boxed{y(0.5) \approx 0.8136}$
+
+Exact: $y = e^{-t^2}$, $y(0.5) = e^{-0.25} = 0.7788$
+\end{solution}
+
+\subsection{Runge-Kutta Methods}
+
+\begin{exercise}
+Use RK4 with $h = 0.2$ to approximate $y(0.2)$ for:
+\[y' = y - t^2 + 1, \quad y(0) = 0.5\]
+\end{exercise}
+
+\begin{solution}
+$f(t, y) = y - t^2 + 1$, $t_0 = 0$, $y_0 = 0.5$, $h = 0.2$
+
+\begin{align*}
+k_1 &= hf(0, 0.5) = 0.2(0.5 - 0 + 1) = 0.2(1.5) = 0.3\\[2mm]
+k_2 &= hf(0.1, 0.5 + 0.15) = 0.2(0.65 - 0.01 + 1) = 0.2(1.64) = 0.328\\[2mm]
+k_3 &= hf(0.1, 0.5 + 0.164) = 0.2(0.664 - 0.01 + 1) = 0.2(1.654) = 0.3308\\[2mm]
+k_4 &= hf(0.2, 0.5 + 0.3308) = 0.2(0.8308 - 0.04 + 1) = 0.2(1.7908) = 0.3582
+\end{align*}
+
+\[y_1 = y_0 + \frac{1}{6}(k_1 + 2k_2 + 2k_3 + k_4)\]
+\[y_1 = 0.5 + \frac{1}{6}(0.3 + 0.656 + 0.6616 + 0.3582) = 0.5 + \frac{1.9758}{6}\]
+\[\boxed{y(0.2) \approx 0.8293}\]
+\end{solution}
+
+\begin{exercise}
+Compare Euler and RK4 for $y' = y$, $y(0) = 1$ at $t = 1$ using $h = 0.5$.
+\end{exercise}
+
+\begin{solution}
+Exact: $y(1) = e \approx 2.7183$
+
+\textbf{Euler} ($h = 0.5$, 2 steps):
+\begin{align*}
+y_1 &= 1 + 0.5(1) = 1.5\\
+y_2 &= 1.5 + 0.5(1.5) = 2.25
+\end{align*}
+Error: $|2.25 - 2.7183| = 0.468$
+
+\textbf{RK4} ($h = 0.5$, 2 steps):
+
+Step 1 ($t_0 = 0$, $y_0 = 1$):
+\begin{align*}
+k_1 &= 0.5(1) = 0.5\\
+k_2 &= 0.5(1.25) = 0.625\\
+k_3 &= 0.5(1.3125) = 0.6563\\
+k_4 &= 0.5(1.6563) = 0.8281\\
+y_1 &= 1 + \frac{1}{6}(0.5 + 1.25 + 1.3125 + 0.8281) = 1.6487
+\end{align*}
+
+Step 2 ($t_1 = 0.5$, $y_1 = 1.6487$):
+\begin{align*}
+k_1 &= 0.5(1.6487) = 0.8244\\
+k_2 &= 0.5(2.0609) = 1.0305\\
+k_3 &= 0.5(2.1640) = 1.0820\\
+k_4 &= 0.5(2.7307) = 1.3653\\
+y_2 &= 1.6487 + \frac{1}{6}(0.8244 + 2.0609 + 2.164 + 1.3653) = 2.7181
+\end{align*}
+
+RK4 Error: $|2.7181 - 2.7183| = 0.0002$
+
+\textbf{Comparison:}
+\begin{center}
+\begin{tabular}{l|cc}
+\toprule
+Method & Approximation & Error \\
+\midrule
+Euler & 2.25 & 0.468 \\
+RK4 & 2.7181 & 0.0002 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+RK4 is dramatically more accurate with the same step size!
+\end{solution}
+
+\end{document}

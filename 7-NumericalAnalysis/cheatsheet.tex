@@ -1,0 +1,217 @@
+\documentclass[10pt,a4paper,landscape]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[landscape,top=0.8cm,bottom=0.8cm,left=0.8cm,right=0.8cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{multicol}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+\tcbuselibrary{skins}
+
+% Compact settings
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.5pt}
+\setlist{nosep,leftmargin=*}
+\pagestyle{empty}
+
+% Section styling
+\newcommand{\chsection}[1]{\textbf{\large #1}\vspace{1pt}\hrule\vspace{3pt}}
+\newcommand{\chsubsec}[1]{\textbf{#1}\vspace{1pt}}
+
+\begin{document}
+
+\begin{center}
+\textbf{\LARGE Numerical Analysis}\\[2pt]
+\small Cheatsheet --- Mathematics 101
+\end{center}
+\vspace{2pt}
+
+\begin{multicols}{4}
+
+%========== ERRORS ==========
+\chsection{Errors \& Approximations}
+
+\chsubsec{Error Types}
+\begin{itemize}
+\item Absolute: $E_a = |x - \tilde{x}|$
+\item Relative: $E_r = \frac{|x - \tilde{x}|}{|x|}$
+\end{itemize}
+
+\chsubsec{Error Sources}
+\begin{itemize}
+\item Round-off: finite precision
+\item Truncation: approximating infinite processes
+\item Input: measurement errors
+\end{itemize}
+
+\chsubsec{Floating-Point}
+$x = \pm m \times \beta^e$\\
+Machine epsilon: $\epsilon_m \approx 2.2 \times 10^{-16}$ (double)
+
+\chsubsec{Catastrophic Cancellation}
+Subtracting nearly equal numbers loses precision.\\
+\textbf{Fix:} Rationalize or reformulate
+
+%========== ROOT FINDING ==========
+\chsection{Root Finding}
+
+\chsubsec{Bisection Method}
+Given $f(a) \cdot f(b) < 0$:
+\begin{enumerate}
+\item $c = \frac{a+b}{2}$
+\item If $f(a) \cdot f(c) < 0$: $b = c$
+\item Else: $a = c$
+\item Repeat
+\end{enumerate}
+Error: $|r - c_n| \leq \frac{b-a}{2^{n+1}}$\\
+Convergence: \textbf{Linear} $O(1/2^n)$
+
+\chsubsec{Newton-Raphson}
+\[\boxed{x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}}\]
+Convergence: \textbf{Quadratic}\\
+Digits double each iteration
+
+\textbf{Fails if:} $f'(x_n) = 0$, bad initial guess
+
+\chsubsec{Secant Method}
+\[\boxed{x_{n+1} = x_n - f(x_n)\frac{x_n - x_{n-1}}{f(x_n) - f(x_{n-1})}}\]
+No derivative needed\\
+Convergence: $O(\phi) \approx O(1.618)$
+
+\chsubsec{Fixed-Point Iteration}
+Rewrite $f(x) = 0$ as $x = g(x)$
+\[x_{n+1} = g(x_n)\]
+Converges if $|g'(r)| < 1$
+
+%========== INTERPOLATION ==========
+\chsection{Interpolation}
+
+\chsubsec{Lagrange Polynomial}
+\[P_n(x) = \sum_{i=0}^{n} y_i L_i(x)\]
+where
+\[L_i(x) = \prod_{j \neq i} \frac{x - x_j}{x_i - x_j}\]
+
+\chsubsec{Newton's Divided Diff}
+\[P_n(x) = \sum_{k=0}^{n} f[x_0,\ldots,x_k]\prod_{j=0}^{k-1}(x-x_j)\]
+
+\textbf{Divided Differences:}
+\begin{align*}
+f[x_i] &= y_i\\
+f[x_i,x_j] &= \frac{f[x_j] - f[x_i]}{x_j - x_i}
+\end{align*}
+
+\chsubsec{Interpolation Error}
+\[f(x) - P_n(x) = \frac{f^{(n+1)}(\xi)}{(n+1)!}\prod_{i=0}^{n}(x-x_i)\]
+
+\textbf{Runge's Phenomenon:} High-degree + equally spaced = oscillations
+
+%========== DIFFERENTIATION ==========
+\chsection{Numerical Differentiation}
+
+\chsubsec{Finite Differences}
+\textbf{Forward:}
+\[f'(x) \approx \frac{f(x+h) - f(x)}{h} + O(h)\]
+
+\textbf{Backward:}
+\[f'(x) \approx \frac{f(x) - f(x-h)}{h} + O(h)\]
+
+\textbf{Central:}
+\[\boxed{f'(x) \approx \frac{f(x+h) - f(x-h)}{2h} + O(h^2)}\]
+
+\chsubsec{Second Derivative}
+\[f''(x) \approx \frac{f(x+h) - 2f(x) + f(x-h)}{h^2}\]
+
+\textbf{Warning:} Differentiation amplifies errors!
+
+%========== INTEGRATION ==========
+\chsection{Numerical Integration}
+
+\chsubsec{Trapezoidal Rule}
+\[\int_a^b f\,dx \approx \frac{h}{2}[f(a) + f(b)]\]
+
+\textbf{Composite:}
+\[\boxed{\frac{h}{2}\left[f_0 + 2\sum_{i=1}^{n-1}f_i + f_n\right]}\]
+Error: $O(h^2)$
+
+\chsubsec{Simpson's Rule}
+\[\int_a^b f\,dx \approx \frac{h}{3}[f_0 + 4f_1 + f_2]\]
+
+\textbf{Composite} ($n$ even):
+\[\boxed{\frac{h}{3}\left[f_0 + 4\sum_{\text{odd}} + 2\sum_{\text{even}} + f_n\right]}\]
+Error: $O(h^4)$
+
+\chsubsec{Comparison}
+\begin{tabular}{@{}ll@{}}
+Trapezoidal & $O(h^2)$ \\
+Simpson's & $O(h^4)$ \\
+\end{tabular}
+
+%========== LINEAR SYSTEMS ==========
+\chsection{Linear Systems}
+
+\chsubsec{Gaussian Elimination}
+\begin{enumerate}
+\item Forward elimination $\to$ upper triangular
+\item Back substitution
+\end{enumerate}
+Multiplier: $m_{ik} = \frac{a_{ik}}{a_{kk}}$
+
+\textbf{Partial Pivoting:} Swap rows to maximize $|a_{kk}|$
+
+\chsubsec{Back Substitution}
+\[x_i = \frac{1}{a_{ii}}\left(b_i - \sum_{j>i}a_{ij}x_j\right)\]
+
+\chsubsec{LU Decomposition}
+$A = LU$ ($L$ lower, $U$ upper)
+\begin{enumerate}
+\item Solve $L\mathbf{y} = \mathbf{b}$ (forward)
+\item Solve $U\mathbf{x} = \mathbf{y}$ (backward)
+\end{enumerate}
+
+\chsubsec{Iterative Methods}
+\textbf{Jacobi:}
+\[x_i^{(k+1)} = \frac{1}{a_{ii}}\left(b_i - \sum_{j \neq i}a_{ij}x_j^{(k)}\right)\]
+
+\textbf{Gauss-Seidel:} Use updated values immediately
+
+\textbf{Converges if:} Diagonally dominant\\
+$|a_{ii}| > \sum_{j \neq i}|a_{ij}|$
+
+%========== ODEs ==========
+\chsection{Numerical ODEs}
+
+\chsubsec{IVP}
+$\frac{dy}{dt} = f(t,y)$, $y(t_0) = y_0$
+
+\chsubsec{Euler's Method}
+\[\boxed{y_{n+1} = y_n + h \cdot f(t_n, y_n)}\]
+Error: $O(h)$ (first-order)
+
+\chsubsec{Runge-Kutta 4 (RK4)}
+\begin{align*}
+k_1 &= hf(t_n, y_n)\\
+k_2 &= hf(t_n + \tfrac{h}{2}, y_n + \tfrac{k_1}{2})\\
+k_3 &= hf(t_n + \tfrac{h}{2}, y_n + \tfrac{k_2}{2})\\
+k_4 &= hf(t_n + h, y_n + k_3)
+\end{align*}
+\[\boxed{y_{n+1} = y_n + \frac{1}{6}(k_1 + 2k_2 + 2k_3 + k_4)}\]
+Error: $O(h^4)$ (fourth-order)
+
+\chsubsec{Method Comparison}
+\begin{tabular}{@{}ll@{}}
+Euler & $O(h)$, 1 eval \\
+RK2 & $O(h^2)$, 2 evals \\
+RK4 & $O(h^4)$, 4 evals \\
+\end{tabular}
+
+\vspace{4pt}
+\hrule
+\vspace{2pt}
+\begin{center}
+\small\textit{Mathematics 101}
+\end{center}
+
+\end{multicols}
+
+\end{document}
